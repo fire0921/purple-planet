@@ -1,12 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import Reactdom from "react-dom";
+import Top_Bar from "./views/topBar.js";
+import Footer from "./views/footer.js";
+import Login from "./views/login.js";
+import "../src/css/index.css";
+import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
+class LandingPage extends React.Component {
+    render() {
+        return (
+            <div id="container">
+                <div className="check">
+                    <Top_Bar />
+                </div>
+                <div id="login">
+                    <Login />
+                </div>
+                <footer>
+                    <Footer />
+                </footer>
+            </div>
+        );
+    }
+}
+
+Reactdom.render(
+    <LandingPage />,
+    document.getElementById("root")
+);
+
 serviceWorker.unregister();
