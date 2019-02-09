@@ -9,14 +9,11 @@ import returnBack from "../icon/mobile/back_m.png";
 
 
 class Footer extends React.Component  {
-    test(){
-        return(console.log("123"));
-    }
     render(){
         return(
             <div>
                 <div className="footer">
-                    <div id="Phone"><img src={ Phone } onClick={()=>(console.log('123'))}  border="0" height="67%" width="67%" /></div>
+                    <div id="Phone"><img src={ Phone }  border="0" height="67%" width="67%" /></div>
                     <div id="Line01"><img src={ Line01 } border="0" height="67%" width="67%" /></div>
                     <div id="back"><img src={ returnBack } border="0" height="67%" width="67%" /></div>
                     <div id="returnTop"><img src={ returnTop } border="0" height="67%" width="67%" /></div>

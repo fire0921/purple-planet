@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './views/login.js';
-import TopBar from './views/topBar.js';
+import App from './components/login.js';
+import TopBar from './components/topBar.js';
 
 
 it('renders without crashing', () => {

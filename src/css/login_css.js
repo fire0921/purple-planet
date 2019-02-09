@@ -14,8 +14,8 @@ export const style = (i, j) => {
     });
 };
 export const styleForH1 = {
-    textAlign: "center",
-    fontSize: "40px",
+        textAlign: "center",
+        frontSize: "40px",
 };
 export const stylePass = {
     display: "flex-raw",

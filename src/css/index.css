@@ -1,4 +1,4 @@
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 890px){
     html,body{
         height: 100%;
     }
@@ -7,9 +7,6 @@
         display: flex;
         flex-direction: column;
         height: 100vh;
-    }
-    .check{
-        flex: 1 0 auto;
     }
     .TopBar{
         background-color:#750075;
@@ -125,4 +122,135 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-} 
+}
+
+@media only screen and (min-width: 900px){
+    html,body{
+        height: 100%;
+    }
+
+    #container{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .check{
+        flex: 1 0 auto;
+    }
+    .TopBar{
+        background-color:#750075;
+        display: flex;
+        justify-content:space-around;
+        flex-direction: row;
+    }
+    .TopBar > div{
+        font-size:25px;
+        margin-left:20px;
+        margin-right:10px;
+        color:#fcfcfc;
+    }
+    .TopBar > div > a{
+        color:#fcfcfc;
+        text-decoration:none;
+    }
+    .TopIcon{
+        flex-direction: row;
+        display:flex;
+        align-items:flex-end;
+    }
+    .TopIcon > div[id^=search] {
+        position:absolute;
+        right:20%;
+    }
+    .TopIcon > div[id=heart02] {
+        position:absolute;
+        right:10%;
+    }
+    .TopIcon > div[id=cart02] {
+        position:absolute;
+        right:0;
+    }
+    .footer{
+        display:flex;
+        justify-content:space-between;
+        flex-direction: row;
+    }
+    #Phone{
+        margin-left:25px;
+    }
+    footer{
+        flex: 0 0 auto;
+    }
+    #login{
+        flex: 60 0  auto;
+    }
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 25px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: #750075;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #FFFFFF;
+        border: solid #750075;
+        border-width: 1px 1px 1px 1px;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        /*background-color: #ccc;*/
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #FFFFFF;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid #750075;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}

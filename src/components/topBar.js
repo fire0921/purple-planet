@@ -1,12 +1,10 @@
 import React from "react";
-import Reactdom from "react-dom";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import "../css/index.css";
 import Logo from "../icon/mobile/logo01_m.png";
 import Search from "../icon/mobile/search01_m.png";
 import heart02 from "../icon/mobile/heart02_m.png";
 import cart02 from "../icon/mobile/cart02_m.png";
-import Radium from "radium";
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 const divStyle = {

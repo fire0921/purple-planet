@@ -1,32 +1,31 @@
 import React from "react";
 import Reactdom from "react-dom";
-import Top_Bar from "./views/topBar.js";
-import Footer from "./views/footer.js";
-import Login from "./views/login.js";
+import Top_Bar from "./components/topBar.js";
+import Footer from "./components/footer.js";
+import Login from "./components/login.js";
+import Group from "./components/group.js";
 import "../src/css/index.css";
 import * as serviceWorker from "./serviceWorker";
 
-
-class LandingPage extends React.Component {
-    render() {
-        return (
-            <div id="container">
-                <div className="check">
+function Page(props){
+    return(
+        <div id="container">
+                <div className= {props.ID}>
                     <Top_Bar />
                 </div>
-                <div id="login">
-                    <Login />
+                <div>
+                    <Group />
                 </div>
                 <footer>
                     <Footer />
                 </footer>
             </div>
-        );
-    }
+    );
 }
 
+
 Reactdom.render(
-    <LandingPage />,
+    <Page ID="group" />,
     document.getElementById("root")
 );
 
