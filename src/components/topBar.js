@@ -5,7 +5,7 @@ import Logo from "../icon/mobile/logo01_m.png";
 import Search from "../icon/mobile/search01_m.png";
 import heart02 from "../icon/mobile/heart02_m.png";
 import cart02 from "../icon/mobile/cart02_m.png";
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+//import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 const divStyle = {
     fontFamily: "新細明體",
@@ -16,10 +16,10 @@ class Top_Bar extends React.Component {
         return (
             <div>
                 <div className="TopIcon">
-                    <div id="logo"><img src={ Logo } border="0" height="67%" width="67%" /></div>
-                    <div id="search"><img src={ Search } border="0" height="67%" width="67%"/></div>
-                    <div id="heart02"><img src={ heart02 } border="0" height="67%" width="67%"/></div>
-                    <div id="cart02"><img src={ cart02 } border="0" height="67%" width="67%"/></div>
+                    <div id="logo"><img alt="logo" src={ Logo } border="0" height="67%" width="67%" /></div>
+                    <div id="search"><img alt="searcher" src={ Search } border="0" height="67%" width="67%"/></div>
+                    <div id="heart02"><img alt="heart02" src={ heart02 } border="0" height="67%" width="67%"/></div>
+                    <div id="cart02"><img alt="cart02" src={ cart02 } border="0" height="67%" width="67%"/></div>
                 </div>
                 <div className="TopBar" style={ divStyle }>
                     <div>分類</div>

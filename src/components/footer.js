@@ -13,10 +13,10 @@ class Footer extends React.Component  {
         return(
             <div>
                 <div className="footer">
-                    <div id="Phone"><img src={ Phone }  border="0" height="67%" width="67%" /></div>
-                    <div id="Line01"><img src={ Line01 } border="0" height="67%" width="67%" /></div>
-                    <div id="back"><img src={ returnBack } border="0" height="67%" width="67%" /></div>
-                    <div id="returnTop"><img src={ returnTop } border="0" height="67%" width="67%" /></div>
+                    <div id="Phone" onClick ={ (e) => {console.log("test") }}><img alt="Phone" src={ Phone }  border="0" height="67%" width="67%" /></div>
+                    <div id="Line01"><img alt="Line01" src={ Line01 } border="0" height="67%" width="67%" /></div>
+                    <div id="back"><img alt="back" src={ returnBack } border="0" height="67%" width="67%" /></div>
+                    <div id="returnTop"><img alt="returnBack" src={ returnTop } border="0" height="67%" width="67%" /></div>
                 </div>
             </div>
         );
