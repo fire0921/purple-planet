@@ -2,7 +2,7 @@ import React from "react";
 import Reactdom from "react-dom";
 import TopBar from "./components/topBar.js";
 import Footer from "./components/footer.js";
-//import Login from "./components/login.js";
+import Login from "./components/login.js";
 import Group from "./components/group.js";
 import "../src/css/index.css";
 import * as serviceWorker from "./serviceWorker";

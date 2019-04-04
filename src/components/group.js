@@ -11,7 +11,7 @@ function Test(){
         imgArray.push(
             <div key={index}>
                 <div style= { cssGroup.img1 }>
-                    <img alt={ index }src={e} border="0" height="100%" width="100%" />
+                    <img alt={ index } src={e} border="0" height="100%" width="100%" />
                     <div style={cssGroup.price}>
                         <div>
                             <div style={ cssGroup.fontSizeFun("120%")}>L0008</div>

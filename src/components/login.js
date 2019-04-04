@@ -28,7 +28,6 @@ class Login extends React.Component {
                 screat2: event.target.value.substr(0,40),
             })
         }else{
-            console.log("handleChange has bug !!");
             alert("請通知管理員處理!!")
         }
     };
