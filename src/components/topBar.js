@@ -11,7 +11,7 @@ const divStyle = {
     fontFamily: "新細明體",
 };
 
-class Top_Bar extends React.Component {
+class top_Bar extends React.Component {
     render() {
         return (
             <div>
@@ -31,5 +31,5 @@ class Top_Bar extends React.Component {
     }
 }
 
-export default Top_Bar;
+export default top_Bar;
 
