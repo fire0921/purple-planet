@@ -5,8 +5,8 @@ import Footer from "../components/footer.js";
 import Group from "../components/group.js";
 import "../css/index.css";
 
-function GroupPage(props){
-	return(
+function GroupPage(props) {
+	return (
 		<div id="container">
 			<div className= "Group">
 				<TopBar />

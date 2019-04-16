@@ -5,9 +5,9 @@ import Footer from "../components/footer.js";
 import Login from "../components/login.js";
 import "../css/index.css";
 
-function LoginPage(props){
-	return(
-		<div id="container">
+function LoginPage(props) {
+  return (
+    <div id="container">
 			<div className= "Login">
 				<TopBar />
 			</div>
@@ -18,7 +18,7 @@ function LoginPage(props){
 				<Footer />
 			</footer>
 		</div>
-	);
+  );
 }
 
 export default LoginPage;
