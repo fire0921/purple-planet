@@ -13,7 +13,7 @@ Reactdom.render(
 			<Route exact path="/" render={() => (
 				loggedIn ? (<Redirect to="/group"/>):(<LoginPage/>)
 			)}/>
-			<Route path="/group" component={GroupPage}/>
+			<Route path="\/group" component={GroupPage}/>
 		</div>
 	</Router>,
 	document.getElementById("root")
