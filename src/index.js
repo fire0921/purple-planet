@@ -5,7 +5,7 @@ import LoginPage from "./pages/loginPage";
 import GroupPage from "./pages/GroupPage";
 import * as serviceWorker from "./serviceWorker";
 
-const loggedIn = true; 
+const loggedIn = false; 
 
 Reactdom.render(
 	<Router>
