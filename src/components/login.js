@@ -16,6 +16,7 @@ class Login extends React.Component {
 			screat2:"",
 		};
 	}
+	
 	http(method, url, data){
 		const option = {
 			method: method,
@@ -94,7 +95,22 @@ class Login extends React.Component {
 		
 		this.http("POST", "http://localhost:8080/login", param);
 	}
+	componentDidMount() {
+    console.log('componentDidMount');
+  }
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+  }
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
 	render() {
+		const responseFacebook = (res) => {
+		  console.log(res);
+		}
 		return (
 			<div>
 				<div>
@@ -124,9 +140,6 @@ class Login extends React.Component {
 						</label>
 					</div>
 					<div style={ cssLogin.splitLine }>--------------------------------------------------------------</div>
-				</div>
-				<div align="center">
-					<Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin"  onClick={() => console.log("test")}>FB登入</Button>
 				</div>
 			</div>
 		);
