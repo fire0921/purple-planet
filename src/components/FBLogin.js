@@ -12,7 +12,11 @@ function FBLogin(){
 	return(
 		<div align="center">
 		  <FacebookLogin
+<<<<<<< HEAD
 		    appId="app-id"
+=======
+		    appId="308963306466048"
+>>>>>>> 016284b60362e5dd864f753fb4be0d924cec7568
 		    autoLoad
 		    callback={responseFacebook}
 		    cookie={true}
