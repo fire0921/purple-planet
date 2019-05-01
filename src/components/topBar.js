@@ -5,7 +5,7 @@ import Logo from "../icon/mobile/logo01_m.png";
 import Search from "../icon/mobile/search01_m.png";
 import heart02 from "../icon/mobile/heart02_m.png";
 import cart02 from "../icon/mobile/cart02_m.png";
-//import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+//import { Router, Route, hashHistory, IndexRoute } from "react-router";
 
 const divStyle = {
 	fontFamily: "新細明體",

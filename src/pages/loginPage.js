@@ -3,10 +3,10 @@ import Reactdom from "react-dom";
 import TopBar from "../components/topBar.js";
 import Footer from "../components/footer.js";
 import Login from "../components/login.js";
-import FBLogin from "../components/FBLogin.js";
+import FBLoginContainers from "../containers/FBLoginContainers";
 import "../css/index.css";
 
-function LoginPage(props) {
+function LoginPage() {
   return (
     <div id="container">
 			<div className= "Login">
@@ -16,7 +16,7 @@ function LoginPage(props) {
 				<Login />
 			</div>
 			<div>
-			  <FBLogin />
+			  <FBLoginContainers />
 			</div>
 			<footer>
 				<Footer />
