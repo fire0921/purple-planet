@@ -1,28 +1,27 @@
 import React from "react";
-import Reactdom from "react-dom";
 import TopBar from "../components/topBar.js";
 import Footer from "../components/footer.js";
-import Login from "../components/login.js";
+import LoginContainers from "../containers/LoginContainers";
 import FBLoginContainers from "../containers/FBLoginContainers";
 import "../css/index.css";
 
 function LoginPage() {
-  return (
-    <div id="container">
+	return (
+		<div id="container">
 			<div className= "Login">
 				<TopBar />
 			</div>
 			<div>
-				<Login />
+				<LoginContainers />
 			</div>
 			<div>
-			  <FBLoginContainers />
+				<FBLoginContainers />
 			</div>
 			<footer>
 				<Footer />
 			</footer>
 		</div>
-  );
+	);
 }
 
 export default LoginPage;

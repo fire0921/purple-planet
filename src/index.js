@@ -11,15 +11,15 @@ const loggedIn = false;
 
 Reactdom.render(
 	<Provider store={store}>
-	  <Router>
-		  <div>
-			  <Route exact path="/" render={() => (
-				  loggedIn ? (<Redirect to="/group"/>):(<LoginPage/>)
-			  )}/>
-			  <Route path="\/group" component={GroupPage}/>
-		  </div>
-	  </Router>
-  </Provider>,
+		<Router>
+			<div>
+				<Route exact path="/" render={() => (
+					loggedIn ? (<Redirect to="/group"/>):(<LoginPage/>)
+				)}/>
+				<Route path="\/group" component={GroupPage}/>
+			</div>
+		</Router>
+	</Provider>,
 	document.getElementById("root")
 );
 

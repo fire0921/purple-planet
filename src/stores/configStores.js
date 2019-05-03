@@ -6,7 +6,7 @@ import rootReducer from "../reducers";
 const initialState = Immutable.Map();
 
 export default createStore(
-  rootReducer,
-  initialState,
-  applyMiddleware(logger)
+	rootReducer,
+	initialState,
+	applyMiddleware(logger)
 );

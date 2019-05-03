@@ -1,8 +1,10 @@
 import { combineReducers } from "redux-immutable";
-import FBLogin from "./data/FBLoginReducers";// import routes from "./routes";
+import FBLoginReducers from "./data/FBLoginReducers.js";// import routes from "./routes";
+import LoginReducers from "./data/LoginReducers.js";// import routes from "./routes";
 
 const rootReducer = combineReducers({
-  FBLogin,
+	FBLoginReducers,
+	LoginReducers
 });
 
 export default rootReducer;
