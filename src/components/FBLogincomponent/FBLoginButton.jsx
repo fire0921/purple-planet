@@ -61,9 +61,7 @@ class FBLogin extends React.Component {
 		//window.FB.getLoginStatus(function(res){console.log(res);});
 		window.FB.Event.subscribe("auth.login", (response) => {
 			// do something with response
-			if (response.status !== "connected"){
-				this.props.responseFacebook({ result: response, browserHistory: this.props.history });
-			}
+			this.props.responseFacebook({ result: response, browserHistory: this.props.history });
 		});
 		window.FB.Event.subscribe("auth.logout", function () {
 			// do something with response

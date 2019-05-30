@@ -72,3 +72,8 @@ Table.propTypes = {
 	onHandleAdd: PropTypes.func,
 	onHandleRemove: PropTypes.func,
 };
+CssTextFields.propTypes = {
+	onadd: PropTypes.func,
+	onremove: PropTypes.func,
+	singleitem: PropTypes.object
+};
