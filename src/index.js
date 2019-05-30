@@ -24,3 +24,7 @@ Reactdom.render(
 );
 
 serviceWorker.unregister();
+
+if (module.hot) {
+	module.hot.accept();
+}

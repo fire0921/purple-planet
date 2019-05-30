@@ -8,13 +8,17 @@ export const TokenState = Immutable.fromJS({
 		updatedAt: "",
 		completed: false,
 	},
-	"__account": {
-		id:"",
-		PhoneNumber:"",
-		Password:"",
-		Password2:"",
-		completed: false,
-	},
+});
+
+export const UserState = Immutable.fromJS({
+
+	id:"",
+	PhoneNumber:"",
+	Password:"",
+	Password2:"",
+	JWTtoken:"",
+	isAuthorized: false,
+
 });
 
 export const __APIKEYS = "ClentSecrectKeys";

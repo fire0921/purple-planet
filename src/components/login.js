@@ -9,6 +9,7 @@ class Login extends React.Component {
 
 	componentDidMount() {
 		//做自動驗證的功能.
+		console.log(document.cookie);
 	}
 	componentWillReceiveProps() {
 		console.log("componentWillReceiveProps");
@@ -29,7 +30,7 @@ class Login extends React.Component {
 					</div>
 					<div className="Password" style={ cssLogin.stylePass }>
 						<input className="screat1" style={ cssLogin.style("50%","10%") } type="password" placeholder="請輸入密碼" onChange={ (i) => this.props.onHandleChange(i) } />
-						<Button variant="contained" style={ cssLogin.ButtonCss } className="login"  onClick={() => this.props.onHandleSubmit(this.props.history, this.props.__account.get("PhoneNumber"))}>登入</Button>
+						<Button variant="contained" style={ cssLogin.ButtonCss } className="login"  onClick={() => this.props.onHandleSubmit(this.props.history, this.props.PhoneNumber, this.props.Password)}>登入</Button>
 					</div>
 					<div style={ cssLogin.aligntCenter }>
 						<p>(會員輸入密碼登入)</p>
