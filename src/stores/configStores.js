@@ -5,8 +5,14 @@ import rootReducer from "../reducers";
 
 const initialState = Immutable.Map();
 
-export default createStore(
-	rootReducer,
-	initialState,
-	applyMiddleware(logger)
-);
+const configureStore = () => {
+	const store = createStore(
+		rootReducer,
+		initialState,
+		applyMiddleware(logger),
+	);
+
+	return store;
+};
+
+export default configureStore;

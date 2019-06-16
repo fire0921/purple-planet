@@ -18,6 +18,7 @@ export const UserState = Immutable.fromJS({
 	Password2:"",
 	JWTtoken:"",
 	isAuthorized: false,
+	Type:"",
 
 });
 

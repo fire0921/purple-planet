@@ -49,7 +49,7 @@ class Login extends React.Component {
 							<span className="checkmark"></span>
 						</label>
 					</div>
-					<div style={ cssLogin.splitLine }>--------------------------------------------------------------</div>
+					<div style={ cssLogin.splitLine }></div>
 				</div>
 			</div>
 		);

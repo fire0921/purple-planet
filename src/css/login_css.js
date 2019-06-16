@@ -22,7 +22,7 @@ export const stylePass = {
 };
 export const ButtonCss = {
 	marginBottom: "10px",
-	marginLeft: "15px",
+	marginLeft: "4%",
 	height: "45px",
 	width: "100px",
 	fontSize: "25px",
@@ -63,7 +63,12 @@ export const FbButtonCss = {
 	backgroundColor: "#b7ddf2",
 };
 export const splitLine = {
-	position:"relative",
 	marginTop:"5%",
-	textAlign:"center",
+	borderBottom: "solid",
+	borderBottomColor: "black",
+	borderBottomStyle: "dashed",
+};
+
+export const deleteLine = {
+	textDecoration: "line-through",
 };

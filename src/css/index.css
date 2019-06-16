@@ -5,6 +5,10 @@
     height: 100%;
   }
 
+	div {
+	  white-space: nowrap;
+	}
+
   #container {
     display: flex;
     flex-direction: column;
@@ -14,12 +18,12 @@
   .TopBar {
     background-color: #750075;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
   }
 
   .TopBar>div {
-    font-size: 25px;
+    font-size: 130%;
     margin-left: 20px;
     margin-right: 10px;
     color: #fcfcfc;
@@ -282,5 +286,5 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+  }	
 }
