@@ -14,15 +14,19 @@ export default {
 		if(PhoneNumber === ""){
 			alert("請輸入手機號碼!!!");
 			dispatch(authError());
+			return;
 		}else if(PhoneNumber.length !== 10){
 			alert("請輸入正確的手機號碼");
 			dispatch(authError());
+			return;
 		}else if(PhoneNumber[0] !== "0" && PhoneNumber[1] !== "9"){
 			alert("請輸入正確的手機號碼");
 			dispatch(authError());
+			return;
 		}else if(Password === ""){
 			alert("請輸入密碼!!!!");
 			dispatch(authError());
+			return;
 		}
 
 		let payloads = {

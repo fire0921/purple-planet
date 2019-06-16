@@ -9,7 +9,7 @@ class Login extends React.Component {
 
 	componentDidMount() {
 		//做自動驗證的功能.
-		console.log(document.cookie);
+		//console.log(document.cookie);
 	}
 	componentWillReceiveProps() {
 		console.log("componentWillReceiveProps");
@@ -26,10 +26,10 @@ class Login extends React.Component {
 				<div>
 					<h1 style={cssLogin.styleForH1}>會員登入 / 註冊</h1>
 					<div className="Phone">
-						<input className="phoneNumber" style={ cssLogin.style("80%") } type="text"  placeholder="請輸入手機號碼" onChange={ (i) => this.props.onHandleChange(i) } />
+						<input className="phoneNumber" style={ cssLogin.style("80%") } type="text"  placeholder="請輸入手機號碼" value={ this.props.PhoneNumber } onChange={ (i) => this.props.onHandleChange(i) } />
 					</div>
 					<div className="Password" style={ cssLogin.stylePass }>
-						<input className="screat1" style={ cssLogin.style("50%","10%") } type="password" placeholder="請輸入密碼" onChange={ (i) => this.props.onHandleChange(i) } />
+						<input className="screat1" style={ cssLogin.style("50%","10%") } type="password" value={ this.props.Password } placeholder="請輸入密碼" onChange={ (i) => this.props.onHandleChange(i) } />
 						<Button variant="contained" style={ cssLogin.ButtonCss } className="login"  onClick={() => this.props.onHandleSubmit(this.props.history, this.props.PhoneNumber, this.props.Password)}>登入</Button>
 					</div>
 					<div style={ cssLogin.aligntCenter }>
@@ -58,6 +58,8 @@ class Login extends React.Component {
 
 Login.propTypes = {
 	__account: PropTypes.object,
+	PhoneNumber: PropTypes.string,
+	Password: PropTypes.string,
 	onHandleChange: PropTypes.func,
 	onHandleSubmit: PropTypes.func,
 	history: PropTypes.object

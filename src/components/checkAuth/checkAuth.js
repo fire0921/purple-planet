@@ -1,0 +1,44 @@
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+// High Order Component
+export default function requireAuthentication(Component, type) {
+	class AuthenticatedComponent extends React.Component {
+		componentWillMount() {
+			this.checkAuth();
+		}
+		componentWillReceiveProps() {
+			this.checkAuth();
+		}
+		checkAuth() {
+			if(type === "auth") {
+				if(!this.props.isAuthorized){
+					this.props.history.push("/login");
+				}
+			} else {
+				if (this.props.isAuthorized) {
+					this.props.history.push("/login");
+				}                
+			}
+		}
+		render() {
+			return ( 
+				<div> 
+					{
+						(type === "auth") ?
+							this.props.isAuthorized === true ? <Component {...this.props } /> : null
+							: this.props.isAuthorized === false ? <Component {...this.props } /> : null
+					} 
+				</div>
+			);
+		}
+	}
+
+	const mapStateToProps = (state) => ({
+		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
+	});
+
+	return connect(mapStateToProps)(withRouter(AuthenticatedComponent));
+}
+
