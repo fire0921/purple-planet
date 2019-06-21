@@ -14,5 +14,5 @@ export const LoginInfo = createAction("__LOGININFO");
 export const LoginBtnAction = createAction("__LOGINBTN", WebAPI.Login);
 export const authComplete = createAction("__authComplete");
 export const authError = createAction("__authError");
-export const checkAuth = createAction("__checkAuth");
+export const checkAuth = createAction("__checkAuth", WebAPI.checkUserAuth);
 export const setUser = createAction("__setUser");

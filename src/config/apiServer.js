@@ -1,5 +1,5 @@
 export const config = {
-	loginUrl: "http://localhost:8080/login",
+	baseUrl: "http://localhost:8080/",
 	// loginUrl: "api/login",
 	port: 3001
 };

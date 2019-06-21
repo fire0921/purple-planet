@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Login from "../../components/login.js";
-import { LoginInfo } from "../../actions/LoginAction";
-import { LoginBtnAction } from "../../actions/LoginAction";
+import { LoginInfo, checkAuth, LoginBtnAction } from "../../actions/LoginAction";
 
 export default connect(
 	(state) => ({
@@ -12,9 +11,12 @@ export default connect(
 		onHandleChange: (index) => (
 			dispatch(LoginInfo(index))
 		),
-		onHandleSubmit: (browserHistory, phone, password) => {
-			dispatch(LoginBtnAction(dispatch, browserHistory, phone, password));
-		}
+		onHandleSubmit: (browserHistory, phone, password) => (
+			dispatch(LoginBtnAction(dispatch, browserHistory, phone, password))
+		),
+		checkUserAuth: () => (
+			dispatch(checkAuth(dispatch))
+		),
 	})
 )(Login);
 

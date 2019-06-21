@@ -10,6 +10,7 @@ class Login extends React.Component {
 	componentDidMount() {
 		//做自動驗證的功能.
 		//console.log(document.cookie);
+		this.props.checkUserAuth();
 	}
 	componentWillReceiveProps() {
 		console.log("componentWillReceiveProps");
@@ -62,6 +63,7 @@ Login.propTypes = {
 	Password: PropTypes.string,
 	onHandleChange: PropTypes.func,
 	onHandleSubmit: PropTypes.func,
+	checkUserAuth: PropTypes.func,
 	history: PropTypes.object
 };
 

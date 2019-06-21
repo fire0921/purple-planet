@@ -36,7 +36,7 @@ export default {
 
 		let JWTtoken = jwt.sign(payloads, __APIKEYS, { expiresIn: "1 day" });
 		
-		axios.post(config.loginUrl, {
+		axios.post(config.baseUrl+"login", {
 			ctoken:JWTtoken,
 		}).then((res) => {
 			console.log(res);
@@ -50,6 +50,19 @@ export default {
 				document.cookie = "token=" + res.data.__token + "; " + expires;
 				dispatch(authComplete(res.data.__token + "; " + expires));
 				browserHistory.push("/group");
+			}
+		}).catch((error) => {
+			console.log(error.message);
+			dispatch(authError());
+		});
+	},
+	checkUserAuth: (dispatch) => {
+		axios.get(config.baseUrl + "check/user/status").then((res) => {
+			console.log(res.data);
+			if(res.data.status === "success"){
+				dispatch(authComplete());
+			}else{
+				dispatch(authError());
 			}
 		}).catch((error) => {
 			console.log(error.message);

@@ -1,6 +1,8 @@
 import React from "react";
 import * as cssGroup from "../css/group_css.js";
 import Button from "@material-ui/core/Button";
+import Cookies from "js-cookie";
+
 const requireContext = require.context("./product",true, /^\.\/.*\.png$/);
 const projectImgs = requireContext.keys().map(requireContext);
 
@@ -43,6 +45,8 @@ function Test(props){
 
 class Group extends React.Component {
 	componentDidMount(){
+		console.log("Did monut");
+		console.log(Cookies.get());
 	}
 	componentWillReceiveProps(nextProps) {
 		console.log("componentWillReceiveProps");

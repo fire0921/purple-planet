@@ -38,6 +38,12 @@ const LoginReducers = handleActions({
 		})
 	),
 
+	__checkAuth:(state) => (
+		state.merge({
+			"isAuthorized":true,
+		})
+	)
+
 }, UserState);
 
 export default LoginReducers;
