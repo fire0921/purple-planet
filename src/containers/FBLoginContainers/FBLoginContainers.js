@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import FBLogin from "../../components/FBLogin.js";
+import FBLogin from "../../components/FBLogin.jsx";
 import { FBLoginAction } from "../../actions/FBLoginAction";
 
 export default connect(

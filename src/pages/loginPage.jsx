@@ -1,6 +1,6 @@
 import React from "react";
-import TopBar from "../components/topBar.js";
-import Footer from "../components/footer.js";
+import TopBar from "../components/topBar.jsx";
+import Footer from "../components/footer.jsx";
 import LoginContainers from "../containers/LoginContainers";
 import FBLoginContainers from "../containers/FBLoginContainers";
 import "../css/index.css";

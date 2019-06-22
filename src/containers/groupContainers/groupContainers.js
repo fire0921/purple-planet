@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Group from "../../components/group.js";
+import Group from "../../components/group.jsx";
 import { checkAuth } from "../../actions/LoginAction";
 
 export default connect(

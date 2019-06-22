@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import LoginPage from "../pages/loginPage";
-import GroupPage from "../pages/GroupPage";
+import LoginPage from "../pages/loginPage.jsx";
+import GroupPage from "../pages/GroupPage.jsx";
 import CheckAuth from "../components/checkAuth";
 
 //const loggedIn = false; 

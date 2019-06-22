@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Login from "../../components/login.js";
+import Login from "../../components/login.jsx";
 import { LoginInfo, checkAuth, LoginBtnAction } from "../../actions/LoginAction";
 
 export default connect(

@@ -1,1 +1,1 @@
-export { default } from "./checkAuth.js";
+export { default } from "./checkAuth.jsx";
