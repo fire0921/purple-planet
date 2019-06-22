@@ -8,14 +8,10 @@ import { withRouter } from "react-router-dom";
 class Login extends React.Component {
 	
 	componentDidMount() {
-		if(this.props.isAuthorized) {
-			return this.props.checkUserAuth();
-		}
+		console.log("DidMount");
 	}
-	componentWillReceiveProps(nextProps) {
-		if(nextProps.isAuthorized){
-			this.props.history.push("/group");
-		}
+	componentWillReceiveProps() {
+		console.log("componentWillReceiveProps");
 	}
 	componentWillUpdate() {
 		console.log("componentWillUpdate");

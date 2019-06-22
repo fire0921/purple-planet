@@ -49,15 +49,9 @@ class Group extends React.Component {
 	}
 	componentDidMount(){
 		console.log("componentDidMount");
-		if(!this.props.isAuthorized){
-			return this.props.checkUserAuth();
-		}
 	}
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps() {
 		console.log("componentWillReceiveProps");
-		if(!nextProps.isAuthorized){
-			this.props.history.push("/login");
-		}
 	}
 	componentWillUpdate() {
 		console.log("componentWillUpdate");

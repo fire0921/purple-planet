@@ -1,26 +1,23 @@
 import React from "react";
-import Cookies from "js-cookie";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { checkAuth } from "../../actions/LoginAction";
 
 // High Order Component
 export default function requireAuthentication(Component, type) {
 	class AuthenticatedComponent extends React.Component {
 		componentWillMount() {
-			this.checkAuth();
+			if(!this.props.isAuthorized && type === "auth"){
+				return this.props.checkUserAuth();
+			}else if(this.props.isAuthorized && type === "login"){
+				return this.props.checkUserAuth();
+			}
 		}
-		componentWillReceiveProps() {
-			this.checkAuth();
-		}
-		checkAuth() {
-			if(type === "auth") {
-				if(!this.props.isAuthorized){
-					this.props.history.push("/login");
-				}
-			} else {
-				if (this.props.isAuthorized) {
-					this.props.history.push("/login");
-				}                
+		componentWillReceiveProps(nextProps) {
+			if(!nextProps.isAuthorized && type === "auth"){
+				this.props.history.push("/login");
+			}else if(nextProps.isAuthorized && type === "login"){
+				this.props.history.push("/group");
 			}
 		}
 		render() {
@@ -39,7 +36,12 @@ export default function requireAuthentication(Component, type) {
 	const mapStateToProps = (state) => ({
 		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
 	});
+	const checkUserAuthFun = (dispatch) => ({
+		checkUserAuth:() => (
+			dispatch(checkAuth(dispatch))
+		)
+	});
 
-	return connect(mapStateToProps)(withRouter(AuthenticatedComponent));
+	return connect(mapStateToProps, checkUserAuthFun)(withRouter(AuthenticatedComponent));
 }
 
