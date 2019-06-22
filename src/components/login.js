@@ -6,20 +6,22 @@ import * as cssLogin from "../css/login_css.js";
 import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
-
+	
 	componentDidMount() {
-		//做自動驗證的功能.
-		//console.log(document.cookie);
-		this.props.checkUserAuth();
+		if(this.props.isAuthorized) {
+			return this.props.checkUserAuth();
+		}
 	}
-	componentWillReceiveProps() {
-		console.log("componentWillReceiveProps");
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.isAuthorized){
+			this.props.history.push("/group");
+		}
 	}
 	componentWillUpdate() {
 		console.log("componentWillUpdate");
 	}
 	componentDidUpdate() {
-		console.log("componentDidUpdate");
+		console.log("componentDidUpdate");	
 	}
 	render() {
 		return (
@@ -59,6 +61,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
 	__account: PropTypes.object,
+	isAuthorized:PropTypes.bool,
 	PhoneNumber: PropTypes.string,
 	Password: PropTypes.string,
 	onHandleChange: PropTypes.func,

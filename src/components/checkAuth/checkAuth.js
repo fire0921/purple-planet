@@ -13,11 +13,8 @@ export default function requireAuthentication(Component, type) {
 			this.checkAuth();
 		}
 		checkAuth() {
-			console.log(Cookies.get("token"));
-			console.log(this.props.isAuthorized);
 			if(type === "auth") {
 				if(!this.props.isAuthorized){
-					console.log("test");
 					this.props.history.push("/login");
 				}
 			} else {

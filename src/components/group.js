@@ -1,7 +1,7 @@
 import React from "react";
 import * as cssGroup from "../css/group_css.js";
 import Button from "@material-ui/core/Button";
-import Cookies from "js-cookie";
+import { withRouter } from "react-router-dom";
 
 const requireContext = require.context("./product",true, /^\.\/.*\.png$/);
 const projectImgs = requireContext.keys().map(requireContext);
@@ -16,8 +16,8 @@ function Test(props){
 					<img alt={ index } src={e} border="0" height="100%" width="100%" />
 					<div style={cssGroup.price}>
 						<div>
-							<div style={ cssGroup.fontSizeFun("120%")}>L0008</div>
-							<div style={ cssGroup.fontSizeFun("120%")}>牛軋糖 300g/包</div>
+							<div style={ cssGroup.fontSizeFun("100%")}>L0008</div>
+							<div style={ cssGroup.fontSizeFun("100%")}>牛軋糖 300g/包</div>
 							<div className="Price" style= { cssGroup.price2 }>
 								<ul className="PriceList"  style={ cssGroup.ulStyle("1px 0 0 0 ") }>
 									<li className="originPrice" style= { cssGroup.deleteLine }>原價$200 </li>
@@ -30,8 +30,8 @@ function Test(props){
 							</div>
 						</div>
 						<div className="buyButton" style={ cssGroup.buyButton }>
-							<Button variant="contained" style={ cssGroup.Buy } onClick={() => console.log(fileName.slice(-1))}>購買</Button>
-							<Button variant="contained" style={ cssGroup.Buy } onClick={() => console.log(props)}>揪團</Button>
+							<Button variant="contained" style={ cssGroup.Buy("0px", "2%") } onClick={() => console.log(fileName.slice(-1))}>購買</Button>
+							<Button variant="contained" style={ cssGroup.Buy("10%", "2%") } onClick={() => console.log(props)}>揪團</Button>
 						</div>
 					</div>
 				</div>
@@ -44,13 +44,20 @@ function Test(props){
 }
 
 class Group extends React.Component {
+	componentWillMount(){
+		console.log("componentWillMount");
+	}
 	componentDidMount(){
-		console.log("Did monut");
-		console.log(Cookies.get());
+		console.log("componentDidMount");
+		if(!this.props.isAuthorized){
+			return this.props.checkUserAuth();
+		}
 	}
 	componentWillReceiveProps(nextProps) {
 		console.log("componentWillReceiveProps");
-		console.log(nextProps);
+		if(!nextProps.isAuthorized){
+			this.props.history.push("/login");
+		}
 	}
 	componentWillUpdate() {
 		console.log("componentWillUpdate");
@@ -65,4 +72,4 @@ class Group extends React.Component {
 	}
 }
 
-export default Group;
+export default withRouter(Group);

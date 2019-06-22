@@ -41,16 +41,17 @@ export const originPrice = {
 	fontSize: "80%",
 };
 
-export const Buy = {
+export const Buy = (L, R) => ({
 	whiteSpace:"nowrap",
 	backgroundColor: "#f6dae6",
 	borderRadius: "50%",
-	width: "70px",
+	width:"70px",
 	height: "70px",
-	marginLeft: "20px",
+	marginLeft: L,
+	marginRight: R,
 	marginTop: "5%",
 	fontSize: "120%",
-};
+});
 
 export const buyButton = {
 	display:"flex",

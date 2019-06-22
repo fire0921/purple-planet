@@ -1,6 +1,5 @@
-import axios from "axios";
+import agent from "./agent";
 import jwt from "jsonwebtoken";
-import { config } from "../config/apiServer.js";
 import { __APIKEYS} from "../constants/models.js";
 import { 
 	authComplete,
@@ -36,7 +35,7 @@ export default {
 
 		let JWTtoken = jwt.sign(payloads, __APIKEYS, { expiresIn: "1 day" });
 		
-		axios.post(config.baseUrl+"login", {
+		agent.post("/login", {
 			ctoken:JWTtoken,
 		}).then((res) => {
 			console.log(res);
@@ -57,8 +56,7 @@ export default {
 		});
 	},
 	checkUserAuth: (dispatch) => {
-		axios.get(config.baseUrl + "check/user/status").then((res) => {
-			console.log(res.data);
+		agent.get("/check/user/status").then((res) => {
 			if(res.data.status === "success"){
 				dispatch(authComplete());
 			}else{

@@ -1,7 +1,7 @@
 import React from "react";
 import TopBar from "../components/topBar.js";
 import Footer from "../components/footer.js";
-import Group from "../components/group.js";
+import GroupContainers from "../containers/groupContainers";
 import "../css/index.css";
 
 function GroupPage() {
@@ -11,7 +11,7 @@ function GroupPage() {
 				<TopBar />
 			</div>
 			<div>
-				<Group />
+				<GroupContainers />
 			</div>
 			<footer>
 				<Footer />

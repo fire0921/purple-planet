@@ -5,7 +5,8 @@ import { LoginInfo, checkAuth, LoginBtnAction } from "../../actions/LoginAction"
 export default connect(
 	(state) => ({
 		PhoneNumber: state.getIn(["LoginReducers", "PhoneNumber"]),
-		Password: state.getIn(["LoginReducers", "Password"])
+		Password: state.getIn(["LoginReducers", "Password"]),
+		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
 	}),
 	(dispatch) => ({
 		onHandleChange: (index) => (
