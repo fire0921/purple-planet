@@ -1,42 +1,63 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../css/index.css";
 import Button from "@material-ui/core/Button";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import * as cssLogin from "../css/login_css.js";
+import { withRouter } from "react-router-dom";
 
-const FBLogin = ({ responseFacebook }) => (
-	<div align="center">
-		<FacebookLogin
-			appId="308963306466048"
-			//autoLoad
-			callback={ responseFacebook }
-			cookie={false}
-			xfbml={false}
-			render={renderProps => (
-				<Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin" onClick={renderProps.onClick}>FB 登入</Button>
-			)}
-		/>
-	</div>
-);
-
-/*
 class FBLogin extends React.Component {
-  render() {
-	  return(
-		  <div align="center">
-			  <FacebookLogin
-				  appId="308963306466048"
-					callback={ this.props.responseFacebook }
-					cookie={ false }
-					xfbml={ false }
-					render={renderProps => (
-					  <Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin" onClick={ renderProps.onClick }>FB 登入</Button>
-					)}
-		    />
-		  </div>
+	componentWillMount() {
+		//fb initialize
+		window.fbAsyncInit = function() {
+			window.FB.init({
+				appId: "308963306466048",
+				status: true,
+				cookie: true,  // enable cookies to allow the server to access
+				// the session
+				xfbml: true,  // parse social plugins on this page
+				version: "v3.3" // The Graph API version to use for the call
+			});
+
+		// Now that we"ve initialized the JavaScript SDK, we call
+		// FB.getLoginStatus().  This function gets the state of the
+		// person visiting this page and can return one of three states to
+		// the callback you provide.  They can be:
+		//
+		// 1. Logged into your app ("connected")
+		// 2. Logged into Facebook, but not your app ("not_authorized")
+		// 3. Not logged into Facebook and can"t tell if they are logged into
+		//    your app or not.
+		//
+		// These three cases are handled in the callback function.
+		};
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, "script", "facebook-jssdk"));
+	}
+	render() {
+		const FBLogin = () => {
+			window.FB.login((res) => { 
+				this.props.responseFacebook({result: res, browserHistory:this.props.history}); }, 
+			{
+				scope: "email",
+				return_scopes: true,
+				enable_profile_selector:true,
+			});
+		};
+		return(
+			<div align="center">
+				<Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin" onClick={ FBLogin }>FB 登入</Button>
+			</div>
 		);
 	}
 }
-*/
+FBLogin.propTypes = {
+	history: PropTypes.object,
+	responseFacebook: PropTypes.func,
+};
 
-export default FBLogin;
+export default withRouter(FBLogin);

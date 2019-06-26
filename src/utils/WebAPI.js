@@ -55,6 +55,18 @@ export default {
 			dispatch(authError());
 		});
 	},
+	FBLogin: (dispatch, { FBtoken, userName}) => {
+		agent.post("/login/fb", {
+			accessToken: FBtoken,
+			userName: userName,
+		}).then((res) => {
+			if(res.data.status === "success"){
+				dispatch(authComplete());	
+			}else{
+				dispatch(authError());
+			}
+		});
+	},
 	checkUserAuth: (dispatch) => {
 		agent.get("/check/user/status").then((res) => {
 			if(res.data.status === "success"){

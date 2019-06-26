@@ -9,9 +9,9 @@ import CheckAuth from "../components/checkAuth";
 export default (
 	<div>
 		<Route exact path="/" render={() => (
-			(<Redirect to="/login" />)
+			(<Redirect to="/group" />)
 		)} />
-		<Route path="\/login" component={ CheckAuth(LoginPage, "login")} />
-		<Route path="\/group" component={ CheckAuth(GroupPage, "auth")}/>
+		<Route path="/login" component={ CheckAuth(LoginPage, "login")} />
+		<Route path="/group" component={ CheckAuth(GroupPage, "auth")}/>
 	</div>
 );

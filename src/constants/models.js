@@ -4,10 +4,16 @@ export const TokenState = Immutable.fromJS({
 	"__token": {
 		id: "",
 		FBtoken: "",
-		JWTtoken:"",
-		updatedAt: "",
-		completed: false,
+		isAuthorized: false,
 	},
+});
+
+export const LineTokenState = Immutable.fromJS({
+
+	id: "",
+	LINEtoken: "",
+	isAuthorized: false,
+
 });
 
 export const UserState = Immutable.fromJS({

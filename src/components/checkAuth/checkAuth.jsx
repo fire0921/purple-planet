@@ -26,7 +26,7 @@ export default function requireAuthentication(Component, type) {
 					{
 						(type === "auth") ?
 							this.props.isAuthorized === true ? <Component {...this.props } /> : null
-							: this.props.isAuthorized === false ? <Component {...this.props } /> : null
+							: <Component {...this.props } />
 					} 
 				</div>
 			);

@@ -7,14 +7,23 @@ export default connect(
 		FBLogin: state.getIn(["FBLoginReducers", "__token"])
 	}),
 	(dispatch) => ({
-		responseFacebook: (event) => {
-			(() => {
-				const token = event.accessToken;
-				console.log(token);
-			})();
-			return(
-				dispatch(FBLoginAction({ FBtoken : event.accessToken }))
-			);
+		responseFacebook: (payloads) => {
+			console.log({ payloads });
+			if(payloads.result.status === "connected"){
+				window.FB.api("/me",function(res){ 
+					console.log(res); 
+					const userName = res.name;
+					//payloads.browserHistory.push("/group");
+					return(
+						dispatch(FBLoginAction(dispatch, {
+							FBtoken: payloads.result.authResponse.accessToken,
+							userName: userName,
+						}))
+					);
+				});
+			}else{
+				console.log("123");
+			}	
 		}
 	})
 )(FBLogin);

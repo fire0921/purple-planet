@@ -44,6 +44,7 @@ function Test(props){
 }
 
 class Group extends React.Component {
+
 	componentWillMount(){
 		console.log("componentWillMount");
 	}

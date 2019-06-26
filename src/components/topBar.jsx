@@ -12,6 +12,9 @@ const divStyle = {
 };
 
 class top_Bar extends React.Component {
+	componentWillMount() {
+		
+	}
 	render() {
 		return (
 			<div>
@@ -23,7 +26,7 @@ class top_Bar extends React.Component {
 				</div>
 				<div className="TopBar" style={ divStyle }>
 					<div>分類</div>
-					<div>揪團跟團</div>
+					<div className="withGroup">揪團跟團</div>
 					<div>會員中心</div>
 				</div>
 			</div>
