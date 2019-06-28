@@ -10,7 +10,7 @@ class FBLogin extends React.Component {
 		//fb initialize
 		window.fbAsyncInit = function() {
 			window.FB.init({
-				appId: "308963306466048",
+				appId: process.env.FBID,
 				status: true,
 				cookie: true,  // enable cookies to allow the server to access
 				// the session

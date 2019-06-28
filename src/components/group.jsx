@@ -5,9 +5,6 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
 
-//const requireContext = require.context("./product",true, /^\.\/.*\.png$/);
-//const projectImgs = requireContext.keys().map(requireContext);
-
 class Group extends React.Component {
 	constructor(props){
 		super(props);
@@ -24,7 +21,6 @@ class Group extends React.Component {
 		let viewportHeight = this.groupScroll.current.clientHeight || 0;
 		let scrollHeights = this.groupScroll.current.scrollTop || 0;
 		let offsetToBottom = pageHeight - viewportHeight - scrollHeights;
-		console.log(offsetToBottom);
 		if(!this.props.complete && !this.props.loading && offsetToBottom <= 20){
 			this.props.getGroupMoreData({ page:this.props.page  });
 		}
@@ -112,18 +108,3 @@ Group.propTypes = {
 };
 
 export default withRouter(Group);
-
-/*
- * let page = this.props.page;
- let getMoreGroupData = this.props.getGroupMoreData;
- window.addEventListener("scroll", function(){
- let pageHeight = Math.max(document.body.scrollHeight,document.body.offsetHeight);
- let viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
- let scrollHeights = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
- let offsetToBottom = pageHeight - viewportHeight - scrollHeights;
- if(offsetToBottom <= 0){
- getMoreGroupData(page + 5);
- }
- });
-
-*/

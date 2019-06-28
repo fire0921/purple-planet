@@ -22,11 +22,3 @@ function GroupPage() {
 
 export default GroupPage;
 
-/*
-Reactdom.render(
-	<Page ID="Login" />,
-	document.getElementById("root")
-);
-
-serviceWorker.unregister();
-*/
