@@ -6,17 +6,37 @@ import { checkAuth } from "../../actions/LoginAction";
 // High Order Component
 export default function requireAuthentication(Component, type) {
 	class AuthenticatedComponent extends React.Component {
-		componentWillMount() {
+		constructor(props) {
+			super(props);
+			this.state = {
+				prevPropsObj: this.props,
+			};
+		}
+
+		componentDidMount() {
 			if(!this.props.isAuthorized && type === "auth"){
 				return this.props.checkUserAuth();
 			}else if(this.props.isAuthorized && type === "login"){
 				return this.props.checkUserAuth();
 			}
 		}
-		componentWillReceiveProps(nextProps) {
-			if(!nextProps.isAuthorized && type === "auth"){
+		static getDerivedStateFromProps(nextProps) {
+			return { prevPropsObj: nextProps};
+		}
+
+		getSnapshotBeforeUpdate() {
+			if(!this.props.isAuthorized && type === "auth"){
+				return "login";
+			}else if(this.props.isAuthorized && type === "login"){
+				return "group";
+			}else{
+				return null;
+			}
+		}
+		componentDidUpdate(prevProps, prevState, snapshot) {
+			if(snapshot === "login"){
 				this.props.history.push("/login");
-			}else if(nextProps.isAuthorized && type === "login"){
+			}else if (snapshot === "group"){
 				this.props.history.push("/group");
 			}
 		}

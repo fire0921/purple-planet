@@ -38,7 +38,6 @@ export default {
 		agent.post("/login", {
 			ctoken:JWTtoken,
 		}).then((res) => {
-			console.log(res);
 			if(res.data.status === "No result!!"){
 				alert("使用者名稱 or 密碼錯誤");
 				dispatch(authError());

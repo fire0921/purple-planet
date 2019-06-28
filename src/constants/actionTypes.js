@@ -6,3 +6,6 @@ export const __authError = "AUTH_ERROR";
 export const __startLogout = "START_LOGUT";
 export const __checkAuth = "CHECK_AUTH";
 export const __setUser = "SET_USER";
+export const __getGroupData = "GET_GROUP_DATA";
+export const __lowEnoughHeight = "LOW_ENOUGH_HEIGHT";
+export const __getDataComplete = "GET_DATA_COMPLETE";

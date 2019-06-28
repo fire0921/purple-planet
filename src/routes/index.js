@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import LoginPage from "../pages/loginPage.jsx";
 import GroupPage from "../pages/GroupPage.jsx";
 import CheckAuth from "../components/checkAuth";
+import Privacy from "../components/privacyPolicy.jsx";
 
 //const loggedIn = false; 
 
@@ -12,6 +13,7 @@ export default (
 			(<Redirect to="/group" />)
 		)} />
 		<Route path="/login" component={ CheckAuth(LoginPage, "login")} />
-		<Route path="/group" component={ CheckAuth(GroupPage, "auth")}/>
+		<Route path="/group" component={ CheckAuth(GroupPage, "noauth")}/>
+		<Route path="/privacy" component={ Privacy }/>
 	</div>
 );

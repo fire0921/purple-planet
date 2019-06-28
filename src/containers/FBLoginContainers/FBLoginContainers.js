@@ -22,7 +22,7 @@ export default connect(
 					);
 				});
 			}else{
-				console.log("123");
+				alert("please Login again");
 			}	
 		}
 	})
