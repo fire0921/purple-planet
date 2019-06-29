@@ -4,13 +4,16 @@ import "../css/index.css";
 import Button from "@material-ui/core/Button";
 import * as cssLogin from "../css/login_css.js";
 import { withRouter } from "react-router-dom";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 class FBLogin extends React.Component {
 	componentWillMount() {
 		//fb initialize
 		window.fbAsyncInit = function() {
 			window.FB.init({
-				appId: process.env.FBID,
+				appId: process.env.REACT_APP_FBID,
 				status: true,
 				cookie: true,  // enable cookies to allow the server to access
 				// the session
