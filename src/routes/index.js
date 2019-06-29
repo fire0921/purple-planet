@@ -13,7 +13,7 @@ export default (
 			(<Redirect to="/group" />)
 		)} />
 		<Route path="/login" component={ CheckAuth(LoginPage, "login")} />
-		<Route path="/group" component={ CheckAuth(GroupPage, "noauth")}/>
+		<Route path="/group" component={ CheckAuth(GroupPage, "auth")}/>
 		<Route path="/privacy" component={ Privacy }/>
 	</div>
 );

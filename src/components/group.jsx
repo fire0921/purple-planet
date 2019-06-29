@@ -59,7 +59,6 @@ class Group extends React.Component {
 		//var projectImgSlice = projectImgs.slice(0, this.props.page);
 		const imgArray = [];
 		this.props.group_data.forEach((e, index) => {
-			const fileName = e.split("/");
 			imgArray.push(
 				<div key={index}>
 					<div style= { cssGroup.img1 }>
@@ -80,7 +79,7 @@ class Group extends React.Component {
 								</div>
 							</div>
 							<div className="buyButton" style={ cssGroup.buyButton }>
-								<Button variant="contained" style={ cssGroup.Buy("0px", "2%") } onClick={() => console.log(fileName.slice(-1))}>購買</Button>
+								<Button variant="contained" style={ cssGroup.Buy("0px", "2%") } onClick={() => this.props.history.go("/login")}>購買</Button>
 								<Button variant="contained" style={ cssGroup.Buy("10%", "2%") } onClick={() => console.log(this.props)}>揪團</Button>
 							</div>
 						</div>
@@ -105,6 +104,7 @@ Group.propTypes = {
 	complete: PropTypes.bool,
 	getGroupMoreData: PropTypes.func,
 	group_data: PropTypes.object,
+	history: PropTypes.object,
 };
 
 export default withRouter(Group);

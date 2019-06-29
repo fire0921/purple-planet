@@ -40,7 +40,7 @@ const LoginReducers = handleActions({
 
 	__checkAuth:(state) => (
 		state.merge({
-			"isAuthorized":true,
+			"isAuthorized":false,
 		})
 	)
 

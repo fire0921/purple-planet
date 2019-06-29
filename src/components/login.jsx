@@ -12,6 +12,7 @@ class Login extends React.Component {
 		console.log("componentWillUnmount");
 	}
 	componentDidMount() {
+		console.log(this.props.history);
 	}
 	getSnapshotBeforeUpdate(prevProps){
 		console.log("getSnapshotBeforeUpdate");

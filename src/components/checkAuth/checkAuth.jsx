@@ -15,9 +15,9 @@ export default function requireAuthentication(Component, type) {
 
 		componentDidMount() {
 			if(!this.props.isAuthorized && type === "auth"){
-				return this.props.checkUserAuth();
-			}else if(this.props.isAuthorized && type === "login"){
-				return this.props.checkUserAuth();
+				return this.props.checkUserAuth({ browserHistory: this.props.history });
+			}else if(!this.props.isAuthorized && type === "login"){
+				return this.props.checkUserAuth({ browserHistory: this.props.history });
 			}
 		}
 		static getDerivedStateFromProps(nextProps) {
@@ -57,8 +57,8 @@ export default function requireAuthentication(Component, type) {
 		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
 	});
 	const checkUserAuthFun = (dispatch) => ({
-		checkUserAuth:() => (
-			dispatch(checkAuth(dispatch))
+		checkUserAuth:(payload) => (
+			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory }))
 		)
 	});
 

@@ -47,14 +47,14 @@ export default {
 				const expires = "expires=" + d.toUTCString();
 				document.cookie = "token=" + res.data.__token + "; " + expires;
 				dispatch(authComplete(res.data.__token + "; " + expires));
-				browserHistory.push("/group");
+				browserHistory.go("/group");
 			}
 		}).catch((error) => {
 			console.log(error.message);
 			dispatch(authError());
 		});
 	},
-	FBLogin: (dispatch, { FBtoken, userName}) => {
+	FBLogin: (dispatch, { FBtoken, userName, browserHistory }) => {
 		agent.post("/login/fb", {
 			accessToken: FBtoken,
 			userName: userName,
@@ -63,19 +63,22 @@ export default {
 				dispatch(authComplete());	
 			}else{
 				dispatch(authError());
+				browserHistory.push("/login");
 			}
 		});
 	},
-	checkUserAuth: (dispatch) => {
+	checkUserAuth: (dispatch, { browserHistory }) => {
 		agent.get("/check/user/status").then((res) => {
 			if(res.data.status === "success"){
 				dispatch(authComplete());
 			}else{
 				dispatch(authError());
+				browserHistory.push("/login");
 			}
 		}).catch((error) => {
 			console.log(error.message);
 			dispatch(authError());
+			browserHistory.push("/login");
 		});
 	}
 };

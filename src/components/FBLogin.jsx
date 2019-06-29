@@ -4,9 +4,6 @@ import "../css/index.css";
 import Button from "@material-ui/core/Button";
 import * as cssLogin from "../css/login_css.js";
 import { withRouter } from "react-router-dom";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 class FBLogin extends React.Component {
 	componentWillMount() {

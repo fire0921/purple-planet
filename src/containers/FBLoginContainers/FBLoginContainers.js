@@ -8,7 +8,6 @@ export default connect(
 	}),
 	(dispatch) => ({
 		responseFacebook: (payloads) => {
-			console.log({ payloads });
 			if(payloads.result.status === "connected"){
 				window.FB.api("/me",function(res){ 
 					console.log(res); 
@@ -18,6 +17,7 @@ export default connect(
 						dispatch(FBLoginAction(dispatch, {
 							FBtoken: payloads.result.authResponse.accessToken,
 							userName: userName,
+							browserHistory: payloads.browserHistory,
 						}))
 					);
 				});
