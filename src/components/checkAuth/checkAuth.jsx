@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { checkAuth } from "../../actions/LoginAction";
+import Immutable from "immutable";
 
 // High Order Component
 export default function requireAuthentication(Component, type) {
@@ -20,12 +21,18 @@ export default function requireAuthentication(Component, type) {
 				return this.props.checkUserAuth({ browserHistory: this.props.history });
 			}
 		}
-		static getDerivedStateFromProps(nextProps) {
-			return { prevPropsObj: nextProps};
+		static getDerivedStateFromProps(nextProps, prevState) {
+			if(!Immutable.is(nextProps, prevState.prevPropsObj)){
+				return { prevPropsObj: nextProps};
+			}else{
+				return null;
+			}
 		}
 
-		getSnapshotBeforeUpdate() {
-			if(!this.props.isAuthorized && type === "auth"){
+		getSnapshotBeforeUpdate(prevProps) {
+			if(Immutable.is(this.props, prevProps)){
+				return null;
+			}else if(!this.props.isAuthorized && type === "auth"){
 				return "login";
 			}else if(this.props.isAuthorized && type === "login"){
 				return "group";

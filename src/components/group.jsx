@@ -1,9 +1,10 @@
 import React from "react";
 import * as cssGroup from "../css/group_css.js";
-import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Group extends React.Component {
 	constructor(props){
@@ -31,6 +32,7 @@ class Group extends React.Component {
 	}
 
 	componentDidMount(){
+		console.log("componentDidMount");
 		this.props.getGroupMoreData({ page:this.props.page });
 	}
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -79,8 +81,8 @@ class Group extends React.Component {
 								</div>
 							</div>
 							<div className="buyButton" style={ cssGroup.buyButton }>
-								<Button variant="contained" style={ cssGroup.Buy("0px", "2%") } onClick={() => this.props.history.go("/login")}>購買</Button>
-								<Button variant="contained" style={ cssGroup.Buy("10%", "2%") } onClick={() => console.log(this.props)}>揪團</Button>
+								<Fab size="large" aria-label="Add" style={ cssGroup.Buy("5%", "2%") } onClick={() => this.props.history.push("/group/groupDetail/1234")}>揪團</Fab>
+								<Fab size="large" aria-label="Add" style={ cssGroup.Buy("10%", "2%") } onClick={() => this.props.history.push("/group/groupDetail/1234")}>購買</Fab>
 							</div>
 						</div>
 					</div>
@@ -92,7 +94,9 @@ class Group extends React.Component {
 				<div className="groupApp" ref={this.groupScroll} style={{ height: "-webkit-fill-available", overflow: "auto" }}>
 					{ imgArray }
 				</div>
-				{ this.props.loading ? <p className="App-intro">....loading</p> : "" }
+				<div className="isLoading">
+					{ this.props.loading ? <CircularProgress /> : "" }
+				</div>
 			</div>
 		);
 	}

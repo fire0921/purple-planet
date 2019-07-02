@@ -47,7 +47,7 @@ export default {
 				const expires = "expires=" + d.toUTCString();
 				document.cookie = "token=" + res.data.__token + "; " + expires;
 				dispatch(authComplete(res.data.__token + "; " + expires));
-				browserHistory.go("/group");
+				browserHistory.push("/group");
 			}
 		}).catch((error) => {
 			console.log(error.message);

@@ -5,10 +5,14 @@ import Logo from "../icon/mobile/logo01_m.png";
 import Search from "../icon/mobile/search01_m.png";
 import heart02 from "../icon/mobile/heart02_m.png";
 import cart02 from "../icon/mobile/cart02_m.png";
-//import { Router, Route, hashHistory, IndexRoute } from "react-router";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const divStyle = {
-	fontFamily: "新細明體",
+	fontFamily: "serif",
+	letterSpacing: "1px",
+	fontWeight: "400",
+	fontStyle: "oblique",
 };
 
 class top_Bar extends React.Component {
@@ -25,7 +29,7 @@ class top_Bar extends React.Component {
 					<div id="cart02"><img alt="cart02" src={ cart02 } border="0" height="67%" width="67%"/></div>
 				</div>
 				<div className="TopBar" style={ divStyle }>
-					<div>分類</div>
+					<div onClick={() => { this.props.history.push("/group/groupDetail/123"); }}>分類</div>
 					<div className="withGroup">揪團跟團</div>
 					<div>會員中心</div>
 				</div>
@@ -34,5 +38,8 @@ class top_Bar extends React.Component {
 	}
 }
 
-export default top_Bar;
+top_Bar.propTypes = {
+	history: PropTypes.object,
+};
 
+export default withRouter(top_Bar);

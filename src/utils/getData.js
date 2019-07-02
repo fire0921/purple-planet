@@ -13,15 +13,16 @@ export default {
 		const number = projectImgs.length;
 		const data = projectImgs.slice(payload.page-10, payload.page);
 		if(payload.page <= number){
-			dispatch(get_group_data({ data:data, page: payload.page+10 }));
-			return;
+			setTimeout(() => {
+				dispatch(get_group_data({ data:data, page: payload.page+10 }));
+			}, 500);
 		}else if(payload.page >= number && !payload.complete){
-			dispatch(get_group_data({ data:data, page: payload.page+10 }));
-			dispatch(get_data_complete());
-			return;
+			setTimeout(() => {
+				dispatch(get_group_data({ data:data, page: payload.page+10 }));
+				dispatch(get_data_complete());
+			},500);
 		}else{
 			dispatch(get_data_complete());
-			return;
 		}
 	},
 };

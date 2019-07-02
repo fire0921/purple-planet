@@ -4,7 +4,6 @@ import "../css/index.css";
 import Button from "@material-ui/core/Button";
 import * as cssLogin from "../css/login_css.js";
 import { withRouter } from "react-router-dom";
-import Immutable from "immutable";
 
 class Login extends React.Component {
 
@@ -12,15 +11,7 @@ class Login extends React.Component {
 		console.log("componentWillUnmount");
 	}
 	componentDidMount() {
-		console.log(this.props.history);
-	}
-	getSnapshotBeforeUpdate(prevProps){
-		console.log("getSnapshotBeforeUpdate");
-		if(!Immutable.is(prevProps, this.props)){
-			return this.props;
-		}else{
-			return null;
-		}
+		console.log("componentDidMount");
 	}
 	componentDidUpdate() {
 		console.log("componentDidUpdate");

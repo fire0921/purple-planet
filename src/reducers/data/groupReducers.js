@@ -6,7 +6,7 @@ const groupReducers = handleActions({
 	__lowEnoughHeight: (state) => (
 		state.mergeDeep({ 
 			"scroll": {
-				"loading": false,
+				"loading": true,
 			} 
 		})
 	),
@@ -14,7 +14,7 @@ const groupReducers = handleActions({
 		state.mergeDeep({
 			"scroll": {
 				"page": payload.page,
-				"loading": true,
+				"loading": false,
 				"complete": false,
 			},
 			"groupData": payload.data,
