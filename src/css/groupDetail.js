@@ -81,3 +81,13 @@ export const text4 = {
 	letterSpacing: "4px",
 
 };
+
+export const buttonTest = (check) => ({
+	background: check?"rgb(50, 82, 234)":"white",
+	border: "solid",
+	borderWidth: "thin",
+});
+
+export const spanTest = (check) => ({
+	color: check?"white":"#556cd6",
+});
