@@ -16,7 +16,7 @@ export const grid = {
 };
 
 export const grid_img = {
-	margin: "10px",
+	margin: "5px",
 };
 
 export const text = (margin) => ({
@@ -69,7 +69,7 @@ export const text3 = {
 };
 
 export const text4 = {
-	marginTop: "50px",
+	marginTop: "30px",
 	color: "#212121",
 	border: 0,
 	width: "fit-content",
@@ -86,8 +86,55 @@ export const buttonTest = (check) => ({
 	background: check?"rgb(50, 82, 234)":"white",
 	border: "solid",
 	borderWidth: "thin",
+	fontSize: "inherit",
 });
 
 export const spanTest = (check) => ({
 	color: check?"white":"#556cd6",
 });
+
+export const BuyButtonGroup = {
+	display: "flex",
+	justifyContent: "center",
+	boxShadow: "none",
+	marginTop:"5%",
+	background:"white",
+}
+
+export const BuyButton = (paddingL, Left, background, space) => ({
+	width: "35%",
+	marginLeft: Left?Left:"none",
+	background: background?background:"#ffcdd2",
+	border: "none",
+	color: "#212121",
+	fontSize: "130%",
+	letterSpacing: space?space:"6px",
+	fontWeight: 600,
+	paddingLeft: paddingL?paddingL:"auto",
+	//fontStyle: "oblique",
+})
+
+export const span = {
+	display: "flex",
+	flexDirection: "row-reverse",
+	marginRight: "10%",
+	color: "rgb(158, 158, 158)",
+}
+
+export const introductionSpan = {
+	marginLeft: "5%",
+	width: "fit-content",
+	background: "#d1c4e9",
+	color: "#673ab7",
+	padding: "1% 2% 1% 2%",
+	fontSize: "110%",
+	fontWeight: 600,
+}
+export const introductionDiv = {
+	padding: "0 2% auto",
+	borderBottom: "solid",
+	borderBottomWidth: "2px",
+	borderColor: "#b39ddb",
+	marginTop: "5%",
+
+}

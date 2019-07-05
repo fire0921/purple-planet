@@ -9,9 +9,9 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 //fake data
-const requireContext = require.context("../components/product",true, /^\.\/.*\.png$/);
+const requireContext = require.context("../icon/drink01",true, /^\.\/.*\.jpg$/);
 const projectImgs = requireContext.keys().map(requireContext);
-const contentText = "每包15顆\n單塊包裝，沖泡衛生方便\n黑糖含有益人體礦物質，\n與各式食材搭配，養身又健康";
+const contentText = "每包15顆\n單塊包裝\t沖泡衛生方便\n黑糖含有益人體礦物質，\n與各式食材搭配，養身又健康";
 
 function RenderText(props){
 	const arrayText = [];
@@ -25,26 +25,41 @@ function RenderText(props){
 	);
 }
 
+function RenderProductImg(props){
+	const arrayImg = props.projectImgs.map((e, index) => {
+		return(
+			<Grid item xs={12}>
+				<img alt={ index } src={ e } style={ Css.img } />
+			</Grid>
+		)
+	})
+
+	return (
+		<div>
+			{ arrayImg }
+		</div>
+	)
+}
+
 function GroupedButtons(props) {
-	console.log(props);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12} md={6}>
 				<Grid container spacing={1} direction="column" alignItems="center">
 					<Grid item>
 						<ButtonGroup color="primary" aria-label="Outlined primary button group">
-							<Button value="1" style={ Css.buttonTest(props.clickStatus === "1") } onClick = { () => props.handleClick("1") }><span style={ Css.spanTest(props.clickStatus==="1") }>老薑</span></Button>
-							<Button value="2" style={ Css.buttonTest(props.clickStatus === "2") } onClick = { () => props.handleClick("2") }><span style={ Css.spanTest(props.clickStatus==="2") }>紅棗</span></Button>
-							<Button value="3" style={ Css.buttonTest(props.clickStatus==="3") } onClick = { () => props.handleClick("3") }><span style={ Css.spanTest(props.clickStatus==="3") }>四合一</span></Button>
-							<Button value="4" style={ Css.buttonTest(props.clickStatus==="4") } onClick = { () => props.handleClick("4") }><span style={ Css.spanTest(props.clickStatus==="4") }>玫瑰</span></Button>
+							<Button key="1" style={ Css.buttonTest(false) }>老薑</Button>
+							<Button key="2" style={ Css.buttonTest(false) }>紅棗</Button>
+							<Button key="3" style={ Css.buttonTest(false) }>四合一</Button>
+							<Button key="4" style={ Css.buttonTest(false) }>玫瑰</Button>
 						</ButtonGroup>
 					</Grid>
 					<Grid item>
 						<ButtonGroup color="primary">
-							<Button>蔓越梅</Button>
-							<Button>金桔</Button>
-							<Button>四物</Button>
-							<Button>綜合</Button>
+							<Button value="5" style={ Css.buttonTest(false) }>蔓越梅</Button>
+							<Button value="6" style={ Css.buttonTest(false) }>金桔</Button>
+							<Button value="7" style={ Css.buttonTest(false) }>四物</Button>
+							<Button value="8" style={ Css.buttonTest(false) }>綜合</Button>
 						</ButtonGroup>
 					</Grid>
 				</Grid>
@@ -54,31 +69,16 @@ function GroupedButtons(props) {
 }
 
 class GroupDetail extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			clickStatus: null,
-		};
-		this.handleClick = this.handleClick.bind(this);
-		this.handleChangeChk = this.handleChangeChk.bind(this);
-	}
-
-	handleChangeChk(e){
-		console.log(e);
-	}
-
-	handleClick(a){
-		return this.setState({ clickStatus: a });
-	}
 	render(){
+		console.log(this.props);
 		return (
 			<div style={ Css.root }>
-				<Grid container spacing={2}>
+				<Grid container spacing={1}>
 					<Grid item xs={12} style={ Css.grid_img }>
 						<img alt="test" src={ projectImgs[0] } style={ Css.img } />
 					</Grid>
 					<Grid item xs={12} style={ Css.grid }>
-						<Typography variant="h5" component="h1" style={ Css.text("12px 0 0 0") }>
+						<Typography variant="h5" component="h1" style={ Css.text("1px 0 0 0") }>
 							黑糖風味飲品{" "}
 						</Typography>
 					</Grid>
@@ -101,10 +101,31 @@ class GroupDetail extends React.Component {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} style={ Css.grid }>
-						<RenderText contentText={ contentText } styles={ Css.text4 }/>
+						<RenderText contentText={ contentText } styles={ Css.text4 } />
 					</Grid>
 					<Grid item xs={12} style={ Css.grid }>
-						<GroupedButtons handleChangeChk= { this.handleChangeChk } clickStatus={ this.state.clickStatus } handleClick = { this.handleClick } { ...this.props }/>
+						<GroupedButtons { ...this.props }/>
+					</Grid>
+					<Grid item xs={12} style={ Css.grid }>
+						<Grid item container spacing={1}>
+							<Grid item xs={12}>
+								<ButtonGroup variant="contained" color="primary" size="large" style={ Css.BuyButtonGroup }>
+									<Button variant="contained" color="secondary" style={ Css.BuyButton() } onClick={ () => this.props.history.push("/group/groupDetail/" + this.props.match.params.id + "/order") }>立即購買</Button>
+									<Button variant="contained" color="primary" style={ Css.BuyButton("10%", "6%", "rgb(230, 153, 185)", "15px") } >揪團去</Button>
+								</ButtonGroup>
+							</Grid>
+							<Grid item xs={12} style={ Css.span }>
+								<span>購買與否 皆可揪團</span>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12}>
+						<div className="Introduction" style={ Css.introductionDiv }>
+							<Typography variant="subtitle1" component="p" style={ Css.introductionSpan }>商品介紹</Typography> 
+						</div>
+					</Grid>
+					<Grid item xs={12}>
+						<RenderProductImg projectImgs={ projectImgs.slice(1) }/>
 					</Grid>
 				</Grid>
 			</div>

@@ -1,5 +1,5 @@
 export const img1 = {
-	margin: "10px",
+	margin: "5px",
 };
 
 export const price = {
