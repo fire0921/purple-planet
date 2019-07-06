@@ -13,11 +13,23 @@ export const root = {
 
 export const grid = {
 	textAlign: "-webkit-center",
+	margin: "2% 0 2% 0",
 };
 
 export const grid_img = {
 	margin: "5px",
 };
+
+export const gridOriginPrice = {
+	textAlign: "-webkit-center",
+	height: "fit-content",
+};
+
+export const gridGroupPrice = {
+	textAlign: "-webkit-center",
+	margin: "0 0 2% 0",
+};
+
 
 export const text = (margin) => ({
 	margin: margin,
@@ -26,14 +38,13 @@ export const text = (margin) => ({
 	height: "100%",
 	width: "100%",
 	fontSize: "28px",
-	fontFamily: "serif",
-	letterSpacing: "5px"
+	letterSpacing: "5px",
+	fontWeight: 600,
 });
 
 export const body1 = (margin, color, fontSize, ) => ({
 	margin: margin || null,
 	color: color || null,
-	fontFamily: "serif",
 	border: 0,
 	fontSize: fontSize || null,
 
@@ -47,10 +58,9 @@ export const text2 = {
 	height: "100%",
 	fontSize: "23px",
 	borderBottom: "ridge",
-	fontFamily: "serif",
-	fontWeight: "300",
 	fontStyle: "oblique",
-	letterSpacing: "6px",
+	fontWeight: 600,
+	letterSpacing: "2px",
 
 };
 
@@ -61,10 +71,9 @@ export const text3 = {
 	width: "fit-content",
 	height: "100%",
 	fontSize: "23px",
-	fontFamily: "serif",
-	fontWeight: "300",
 	fontStyle: "oblique",
-	letterSpacing: "4px",
+	fontWeight: 600,
+	letterSpacing: "1px",
 
 };
 
@@ -75,11 +84,8 @@ export const text4 = {
 	width: "fit-content",
 	height: "100%",
 	fontSize: "20px",
-	fontFamily: "serif",
-	fontWeight: "300",
 	fontStyle: "oblique",
-	letterSpacing: "4px",
-
+	letterSpacing: "1px",
 };
 
 export const buttonTest = (check) => ({

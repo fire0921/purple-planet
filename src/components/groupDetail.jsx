@@ -28,8 +28,10 @@ function RenderText(props){
 function RenderProductImg(props){
 	const arrayImg = props.projectImgs.map((e, index) => {
 		return(
-			<Grid item xs={12}>
-				<img alt={ index } src={ e } style={ Css.img } />
+			<Grid item xs={12} key={ e }>
+				<div>
+					<img alt={ index } src={ e } style={ Css.img } />
+				</div>
 			</Grid>
 		)
 	})
@@ -73,7 +75,7 @@ class GroupDetail extends React.Component {
 		console.log(this.props);
 		return (
 			<div style={ Css.root }>
-				<Grid container spacing={1}>
+				<Grid container spacing={0}>
 					<Grid item xs={12} style={ Css.grid_img }>
 						<img alt="test" src={ projectImgs[0] } style={ Css.img } />
 					</Grid>
@@ -87,12 +89,12 @@ class GroupDetail extends React.Component {
 							D0001
 						</Typography>
 					</Grid>
-					<Grid item xs={12} style={ Css.grid }>
+					<Grid item xs={12} style={ Css.gridOriginPrice }>
 						<Typography variant="h5" component="p" style={ Css.text2 }>
 							原價{" "}<span style={{ textDecoration: "line-through" }}>$200</span>{" "}售價{" "}$190
 						</Typography>
 					</Grid>
-					<Grid item xs={12} style={ Css.grid }>
+					<Grid item xs={12} style={ Css.gridGroupPrice }>
 						<Typography variant="h5" component="p" style={ Css.text3 }>
 							成團價10包{" "}團購價$180
 						</Typography>

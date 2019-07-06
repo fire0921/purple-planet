@@ -3,6 +3,9 @@
   html,
   body {
     height: 100%;
+		font-family: serif, Roboto, Helvetica, Arial, sans-serif;
+		font-weight: 500;
+
   }
 
 	.isLoading {

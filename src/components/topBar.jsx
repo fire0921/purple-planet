@@ -12,7 +12,7 @@ const divStyle = {
 	fontFamily: "serif",
 	letterSpacing: "1px",
 	fontWeight: "400",
-	fontStyle: "oblique",
+	//fontStyle: "oblique",
 };
 
 class top_Bar extends React.Component {
@@ -29,7 +29,7 @@ class top_Bar extends React.Component {
 					<div id="cart02"><img alt="cart02" src={ cart02 } border="0" height="67%" width="67%"/></div>
 				</div>
 				<div className="TopBar" style={ divStyle }>
-					<div onClick={() => { this.props.history.push("/group/groupDetail/123"); }}>分類</div>
+					<div onClick={() => { this.props.history.push("/group"); }}>分類</div>
 					<div className="withGroup">揪團跟團</div>
 					<div>會員中心</div>
 				</div>

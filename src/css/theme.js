@@ -3,29 +3,13 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 // A custom theme for this app
 const theme = createMuiTheme({
-	fontFamily: [
-		"-apple-system",
-		"BlinkMacSystemFont",
-		"\"Segoe UI\"",
-		"Roboto",
-		"\"Helvetica Neue\"",
-		"Arial",
-		"sans-serif",
-		"\"Apple Color Emoji\"",
-		"\"Segoe UI Emoji\"",
-		"\"Segoe UI Symbol\"",
-	].join(","),
-	fontWeightMedium: 500,
-	body1: {
-		fontWeight: 500,
-		fontStyle: "italic",
-	},
-	subtitle1: {
-		fontSize: 12,
-		fontStyle: "italic",
-	},
-	button: {
-		fontStyle: "italic",
+	
+	typography:{
+		fontFamily: " serif, \"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
+		body1: {
+			fontWeight: 500,
+			fontStyle: "italic",
+		},
 	},
 	palette: {
 		primary: {
