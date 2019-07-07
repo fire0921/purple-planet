@@ -27,3 +27,43 @@ export const textCount = {
 	//borderBottom: "solid",
 	//borderWidth: "thin",
 }
+
+export const tableTextCount = {
+	fontSize:"120%",
+	letterSpacing: "2px"
+}
+
+export const padding = (padd) => ({
+	padding: padd,
+})
+
+export const paddingL = (padd) => ({
+	paddingLeft: padd,
+})
+
+export const paddingT = (padd) => ({
+	paddingTop: padd,
+})
+
+export const fontSize = (size) => ({
+	fontSize: size,
+})
+
+export const fontStyle = (styles) => ({
+	fontStyle: styles,
+})
+
+export const notice = {
+	fontSize: "100%",
+	textAlign: "-webkit-right",
+	fontStyle: "oblique",
+	color: "#f06292",
+
+}
+
+export const tableBorder = { 
+	borderBottom:"solid", 
+	borderWidth:"thin", 
+	paddingBottom:"1%",
+	borderColor:"#424242",
+}

@@ -28,9 +28,14 @@ class top_Bar extends React.Component {
 					<div id="heart02"><img alt="heart02" src={ heart02 } border="0" height="67%" width="67%"/></div>
 					<div id="cart02"><img alt="cart02" src={ cart02 } border="0" height="67%" width="67%"/></div>
 				</div>
+				<div>
+					{"回饋金"}
+				</div>
 				<div className="TopBar" style={ divStyle }>
 					<div onClick={() => { this.props.history.push("/group"); }}>分類</div>
-					<div className="withGroup">揪團跟團</div>
+					<div className="withGroup">
+						<span>揪團跟團</span>
+					</div>
 					<div>會員中心</div>
 				</div>
 			</div>
