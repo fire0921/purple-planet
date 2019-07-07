@@ -33,17 +33,18 @@ function RenderProductImg(props){
 					<img alt={ index } src={ e } style={ Css.img } />
 				</div>
 			</Grid>
-		)
-	})
+		);
+	});
 
 	return (
 		<div>
 			{ arrayImg }
 		</div>
-	)
+	);
 }
 
 function GroupedButtons(props) {
+	console.log(props);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12} md={6}>
@@ -148,6 +149,10 @@ GroupedButtons.propTypes = {
 RenderText.propTypes = {
 	contentText: PropTypes.string,
 	styles: PropTypes.object,
+};
+
+RenderProductImg.propTypes = {
+	projectImgs: PropTypes.array,
 };
 
 export default withRouter(GroupDetail);

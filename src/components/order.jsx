@@ -18,12 +18,12 @@ const fakeData = [
 	{"name":"黑糖金桔", "price":190},
 	{"name":"黑糖四物", "price":190},
 	{"name":"黑糖綜合", "price":190}
-]
+];
 
 
 function Table(props){
 	console.log(props);
-	const TableArray = props.fakeData.map((e, index) => {
+	const TableArray = props.fakeData.map((e) => {
 		return(
 			<Grid item xs={12} key={ e.name }>
 				<Grid container spacing={0}>
@@ -41,7 +41,7 @@ function Table(props){
 				</Grid>
 			</Grid>
 		);
-	})
+	});
 
 	return(
 		<Grid container spacing={0}>
@@ -76,7 +76,7 @@ function Form(props){
 										D0001{" "}
 									</Typography>
 								</Grid>
-								<Grid item xs={5} style={ Css.paddingL("10%")}>
+								<Grid item xs={5} style={ Css.paddingL("13%")}>
 									<Typography variant="h6" component="p" style={ Css.gridFormHeaderNameChild("-webkit-center") }>
 										數量
 									</Typography>
@@ -109,7 +109,7 @@ function Form(props){
 				</Grid>
 			</Grid>
 		</div>
-	)
+	);
 }
 
 class Order extends React.Component {
@@ -123,7 +123,7 @@ class Order extends React.Component {
 			test:[],
 			count:0,
 			total:0,
-		}
+		};
 	}
 
 	componentDidUpdate(){
@@ -143,18 +143,23 @@ class Order extends React.Component {
 			count: this.state.count + parseInt(event.target.value),
 			total: this.state.total + parseInt(event.target.value)*price,  
 			test: this.state.test.concat({[name]: event.target.value}),
-		}))
+		}));
 	}
 	render(){
 		return(
 			<div><Form fakeData={ fakeData } onHandleChange={ this.onHandleChange }{...this.state}/></div>
 		);
 	}
-
-};
+}
 
 Form.propTypes = {
 	fakeData : PropTypes.array,
-}
+};
+
+Table.propTypes = {
+	fakeData : PropTypes.array,
+	test : PropTypes.array,
+	onHandleChange: PropTypes.func,
+};
 
 export default withRouter(Order);
