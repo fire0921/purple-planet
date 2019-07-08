@@ -26,4 +26,4 @@ yarn-error.log*
 todolist.txt
 .env
 .tern-project
-
+/.vscode

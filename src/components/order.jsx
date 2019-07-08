@@ -20,10 +20,17 @@ const fakeData = [
 	{"name":"黑糖綜合", "price":190}
 ];
 
+function countItemSum(obj){
+	return Object.keys(obj).reduce((sum, key) => ( sum + obj[key].count||0), 0);
+}
+
+function totalMoneySum(obj){
+	return Object.keys(obj).reduce((sum, key) => ( sum + obj[key].count * obj[key].price||0), 0);
+}
 
 function Table(props){
-	console.log(props);
 	const TableArray = props.fakeData.map((e) => {
+		const product = props.items[e.name];
 		return(
 			<Grid item xs={12} key={ e.name }>
 				<Grid container spacing={0}>
@@ -32,7 +39,7 @@ function Table(props){
 					</Grid>
 					<Grid item xs={5} style={ Css.gridFormHeaderNameChild("-webkit-right") }>
 						<button>-</button>
-						<input type="number" value={props.test[e.name]} style={ Css.textCount } onChange={ (event) => props.onHandleChange(e, event)} />
+						<input type="number" value={ (e.name in props.items && product["count"] !== 0)?product["count"] : ""} style={ Css.textCount } onChange={ (event) => props.onHandleChange(e, event)} />
 						<button>+</button>
 					</Grid>
 					<Grid item xs={3} style={ Css.gridFormHeaderNameChild("-webkit-right") }>
@@ -53,7 +60,6 @@ function Table(props){
 }
 
 function Form(props){
-	console.log(props);
 	return(
 		<div>
 			<Grid container spacing={0}>
@@ -120,31 +126,46 @@ class Order extends React.Component {
 			name: "Tim",
 			age: 18,
 			job: "",
-			test:[],
+			items:{},
 			count:0,
 			total:0,
 		};
 	}
 
-	componentDidUpdate(){
-		console.log(this.state);
-	}
-
+	
 	onHandleChange({ name, price }, event){
 		event.persist();
 		if(event.target.value > 100){ 
 			alert("to much!!");
 			return;
-		}else if(!event.target.value){
+		}else if(event.target.value < 0){
+			alert("請輸入整數");
 			return;
+		}else if( event.target.value === ""){
+			event.target.value = 0;
 		}
+
 		this.setState(() => ({
-			[name]: event.target.value,
-			count: this.state.count + parseInt(event.target.value),
-			total: this.state.total + parseInt(event.target.value)*price,  
-			test: this.state.test.concat({[name]: event.target.value}),
+			items: {
+				...this.state.items,
+				[name]: { 
+					"count": parseInt(event.target.value),
+					"price": price,
+				}
+			},
 		}));
 	}
+
+	static getDerivedStateFromProps(props, state){
+
+		return {
+			count: countItemSum(state.items),
+			total: totalMoneySum(state.items),
+		};
+	}
+
+	//count: this.state.count + parseInt(event.target.value),
+	//total: this.state.total + parseInt(event.target.value)*price,
 	render(){
 		return(
 			<div><Form fakeData={ fakeData } onHandleChange={ this.onHandleChange }{...this.state}/></div>
@@ -154,11 +175,13 @@ class Order extends React.Component {
 
 Form.propTypes = {
 	fakeData : PropTypes.array,
+	count : PropTypes.number,
+	total : PropTypes.number,
 };
 
 Table.propTypes = {
 	fakeData : PropTypes.array,
-	test : PropTypes.array,
+	items : PropTypes.object,
 	onHandleChange: PropTypes.func,
 };
 
