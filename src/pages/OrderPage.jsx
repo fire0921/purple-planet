@@ -1,7 +1,7 @@
 import React from "react";
 import TopBar from "../components/topBar.jsx";
 import Footer from "../components/footer.jsx";
-import Order from "../components/order.jsx";
+import Order from "../components/order";
 import "../css/index.css";
 
 
