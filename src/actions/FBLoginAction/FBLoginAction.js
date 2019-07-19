@@ -1,6 +1,9 @@
-import { createAction } from "redux-actions";
-// eslint-disable-next-line
-import { __FBLOGIN } from "../../constants/actionTypes";
-import WebAPI from "../../utils/WebAPI";
+import { createAction } from "redux-actions"; // eslint-disable-next-line
+import { __loginFb, __authCompleteFb, __checkAuthFb, __authErrorFb } from "../../constants/actionTypes";
+import authFb from "../../utils/authFb.js";
 
-export const FBLoginAction = createAction("__FBLOGIN", WebAPI.FBLogin);
+export const loginActionFb = createAction("__loginFb", authFb.login_fb_api);
+export const authCompleteFb = createAction("__authCompleteFb");
+export const authErrorFb = createAction("__authErrorFb");
+export const checkAuthFb = createAction("__checkAuthFb");
+

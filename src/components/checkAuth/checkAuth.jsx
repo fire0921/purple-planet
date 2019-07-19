@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { checkAuth } from "../../actions/LoginAction";
@@ -16,7 +17,7 @@ export default function requireAuthentication(Component, type) {
 
 		componentDidMount() {
 			if(!this.props.isAuthorized){
-				return this.props.checkUserAuth({ browserHistory: this.props.history, Types: type });
+				return this.props.checkUserAuth({ browserHistory: this.props.history, authTypes: type });
 			}
 		}
 		static getDerivedStateFromProps(nextProps, prevState) {
@@ -56,15 +57,23 @@ export default function requireAuthentication(Component, type) {
 		}
 	}
 
+	AuthenticatedComponent.propTypes = {
+		history: PropTypes.object,
+		isAuthorized: PropTypes.bool,
+		checkUserAuth: PropTypes.func,
+	};
+
 	const mapStateToProps = (state) => ({
 		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
 	});
 	const checkUserAuthFun = (dispatch) => ({
 		checkUserAuth:(payload) => (
-			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory, Types: type }))
+			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory, authTypes: payload.authTypes }))
 		)
 	});
 
 	return connect(mapStateToProps, checkUserAuthFun)(withRouter(AuthenticatedComponent));
 }
+
+
 

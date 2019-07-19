@@ -1,10 +1,8 @@
 import agent from "./agent";
 import jwt from "jsonwebtoken";
 import { __APIKEYS} from "../constants/models.js";
-import { 
-	authComplete,
-	authError,
-} from "../actions/LoginAction";
+import { authComplete, authError } from "../actions/LoginAction";
+import { authCompleteFb, authErrorFb } from "../actions/FBLoginAction";
 
 
 export default {
@@ -54,26 +52,32 @@ export default {
 			dispatch(authError());
 		});
 	},
-	FBLogin: (dispatch, { FBtoken, userName, browserHistory }) => {
-		agent.post("/login/fb", {
-			accessToken: FBtoken,
-			userName: userName,
-		}).then((res) => {
-			if(res.data.status === "success"){
-				dispatch(authComplete());	
-			}else{
-				dispatch(authError());
-				//browserHistory.push("/login");
-			}
-		});
-	},
-	checkUserAuth: (dispatch, { browserHistory, Types }) => {
-		console.log(Types);
+	checkUserAuth: (dispatch, { browserHistory, authTypes }) => {
 		agent.get("/check/user/status").then((res) => {
-			if(res.data.status === "success"){
+			const status = res.data.status;
+			const loginType = res.data.loginType;
+
+			if(status === "success" && loginType === "FB"){
+				window.FB.getLoginStatus(function(response){
+					if(response.status === "connected"){
+						const FBtoken = response.authResponse.accessToken;
+						window.FB.api("/me", function(profile){
+							dispatch(authCompleteFb({
+								userId: profile.id,
+								FBtoken: FBtoken,
+								userName: profile.name,
+							}));
+						});
+					}else{
+						dispatch(authErrorFb());
+					}
+				});
+			}else if(status === "success" && loginType === "origin"){
 				dispatch(authComplete());
-			}else if(Types === "authOrder"){
+				//browserHistory.push("/group");
+			}else if(authTypes === "authOrder"){
 				dispatch(authError());
+				dispatch(authErrorFb());
 			}else{
 				dispatch(authError());
 				browserHistory.push("/login");

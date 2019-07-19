@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as Css from "../../css/Order.js";
 import { withRouter } from "react-router-dom";
@@ -99,7 +100,9 @@ function Form(props){
 					</Typography>
 				</Grid>
 				<Grid item xs={12}>
-					<FBLoginContainers />
+					{
+						(!props.FBisAuthorized && !props.isAuthorized)?<FBLoginContainers />:null
+					}
 				</Grid>
 			</Grid>
 		</div>
@@ -224,6 +227,7 @@ class Order extends React.Component {
 					updatePayWay={this.updatePayWay}
 					onHandleRemove={this.onHandleRemove}
 					{...this.state}
+					{...this.props}
 				/>
 			</div>
 		);
@@ -234,6 +238,15 @@ Form.propTypes = {
 	fakeData : PropTypes.array,
 	count : PropTypes.number,
 	total : PropTypes.number,
+	FBisAuthorized: PropTypes.bool,
+	isAuthorized: PropTypes.bool,
 };
 
-export default withRouter(Order);
+const mapStateToProps = (state) => ({
+	FBisAuthorized: state.getIn(["FBLoginReducers", "__token", "isAuthorized"]),
+	isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
+
+});
+
+
+export default connect(mapStateToProps)(withRouter(Order));

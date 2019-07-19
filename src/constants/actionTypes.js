@@ -1,4 +1,7 @@
-export const __FBLOGIN = "FBLOGIN";
+export const __loginFb = "LOGINFBINFO";
+export const __authCompleteFb = "AUTH_COMPLETE_FB";
+export const __checkAuthFb = "CHECK_AUTH_FB";
+export const __authErrorFb = "AUTH_ERROR_FB";
 export const __LOGININFO = "LOGININFO";
 export const __LOGINBTN = "LOGINBTN";
 export const __authComplete = "AUTH_COMPLETE";

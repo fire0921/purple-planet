@@ -41,16 +41,16 @@ class FBLogin extends React.Component {
 
 	}
 	render() {
+		
 		const FBLogin = () => {
-			window.FB.login((res) => { 
-				this.props.responseFacebook({result: res, browserHistory:this.props.history}); }, 
+			window.FB.login((res) => {
+				this.props.responseFacebook({result: res, browserHistory:this.props.history}); },
 			{
-				scope: "email",
+				scope: "email,public_profile",
 				return_scopes: true,
 				enable_profile_selector:true,
 			});
 		};
-		
 		return(
 			<div align="center">
 				<Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin" onClick={ FBLogin }>FB 登入</Button>

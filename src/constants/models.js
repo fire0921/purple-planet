@@ -2,7 +2,9 @@ import Immutable from "immutable";
 
 export const TokenState = Immutable.fromJS({
 	"__token": {
+		userId: "",
 		FBtoken: "",
+		userName: "",
 		isAuthorized: false,
 		type:"FB",
 	},
