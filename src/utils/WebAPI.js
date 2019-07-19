@@ -63,14 +63,17 @@ export default {
 				dispatch(authComplete());	
 			}else{
 				dispatch(authError());
-				browserHistory.push("/login");
+				//browserHistory.push("/login");
 			}
 		});
 	},
-	checkUserAuth: (dispatch, { browserHistory }) => {
+	checkUserAuth: (dispatch, { browserHistory, Types }) => {
+		console.log(Types);
 		agent.get("/check/user/status").then((res) => {
 			if(res.data.status === "success"){
 				dispatch(authComplete());
+			}else if(Types === "authOrder"){
+				dispatch(authError());
 			}else{
 				dispatch(authError());
 				browserHistory.push("/login");

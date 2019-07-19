@@ -15,10 +15,8 @@ export default function requireAuthentication(Component, type) {
 		}
 
 		componentDidMount() {
-			if(!this.props.isAuthorized && type === "auth"){
-				return this.props.checkUserAuth({ browserHistory: this.props.history });
-			}else if(!this.props.isAuthorized && type === "login"){
-				return this.props.checkUserAuth({ browserHistory: this.props.history });
+			if(!this.props.isAuthorized){
+				return this.props.checkUserAuth({ browserHistory: this.props.history, Types: type });
 			}
 		}
 		static getDerivedStateFromProps(nextProps, prevState) {
@@ -32,17 +30,15 @@ export default function requireAuthentication(Component, type) {
 		getSnapshotBeforeUpdate(prevProps) {
 			if(Immutable.is(this.props, prevProps)){
 				return null;
-			}else if(!this.props.isAuthorized && type === "auth"){
-				return "login";
 			}else if(this.props.isAuthorized && type === "login"){
 				return "group";
 			}else{
-				return null;
+				return "login";
 			}
 		}
 		componentDidUpdate(prevProps, prevState, snapshot) {
 			if(snapshot === "login"){
-				this.props.history.push("/login");
+				//this.props.history.push("/login");
 			}else if (snapshot === "group"){
 				this.props.history.push("/group");
 			}
@@ -65,7 +61,7 @@ export default function requireAuthentication(Component, type) {
 	});
 	const checkUserAuthFun = (dispatch) => ({
 		checkUserAuth:(payload) => (
-			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory }))
+			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory, Types: type }))
 		)
 	});
 

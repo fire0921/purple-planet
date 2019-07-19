@@ -15,9 +15,9 @@ export default (
 			(<Redirect to="/group" />)
 		)} />
 		<Route exact path="/login" component={ CheckAuth(LoginPage, "login")} />
-		<Route exact path="/group" component={ CheckAuth(GroupPage, "noauth")}/>
+		<Route exact path="/group" component={ GroupPage }/>
 		<Route exact path="/group/groupDetail/:id" component={ GroupDetailPage }/>
-		<Route exact path="/group/groupDetail/:id/order" component={ OrderPage }/>
+		<Route exact path="/group/groupDetail/:id/order" component={ CheckAuth(OrderPage, "authOrder") }/>
 		<Route exact path="/privacy" component={ Privacy }/>
 	</div>
 );
