@@ -43,8 +43,7 @@ function RenderProductImg(props){
 	);
 }
 
-function GroupedButtons(props) {
-	console.log(props);
+function GroupedButtons() {
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12} md={6}>
@@ -73,7 +72,6 @@ function GroupedButtons(props) {
 
 class GroupDetail extends React.Component {
 	render(){
-		console.log(this.props);
 		return (
 			<div style={ Css.root }>
 				<Grid container spacing={0}>
@@ -138,6 +136,7 @@ class GroupDetail extends React.Component {
 
 GroupDetail.propTypes = {
 	match: PropTypes.object,
+	history: PropTypes.object,
 };
 
 GroupedButtons.propTypes = {

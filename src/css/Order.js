@@ -192,6 +192,7 @@ export const payWay = {
 	textAlign: "-webkit-Left",
 	fontStyle: "oblique",
 	color: "#f06292",
+	fontSize: "120%",
 
 };
 

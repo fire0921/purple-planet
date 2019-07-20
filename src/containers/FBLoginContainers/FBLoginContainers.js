@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import FBLogin from "../../components/FBLogin.jsx";
+import FBLogin from "../../components/FBLogincomponent";
 import { loginActionFb } from "../../actions/FBLoginAction";
 
 export default connect(
@@ -9,7 +9,7 @@ export default connect(
 	(dispatch) => ({
 		responseFacebook: (payloads) => {
 			if(payloads.result.status === "connected"){
-				window.FB.api("/me",function(res){ 
+				window.FB.api("/me", { fields: "name,email" }, function(res){ 
 
 					dispatch(loginActionFb(dispatch, {
 						userId: res.id,

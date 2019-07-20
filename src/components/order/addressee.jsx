@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Css from "../../css/Order.js";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-//import FormLabel from "@material-ui/core/FormLabel";
-//import FormHelperText from "@material-ui/core/FormHelperText";
+import AddresseeTable from "./adresseeTable.jsx";
 
 const CustomerRadio = withStyles({
 	root: {
@@ -29,12 +31,12 @@ const useStyles = makeStyles(theme => ({
 	group: {
 		display: "flex",
 		flexWrap: "wrap",
-		flexDirection: "row",
+		flexDirection: "column",
 		margin: theme.spacing(0, 0),
 	},
 }));
 
-export default function PayWay(props) {
+function AddresseeOption(props) {
 	const classes = useStyles();
 
 	return (
@@ -47,15 +49,41 @@ export default function PayWay(props) {
 					value={props.payWay}
 					onChange={props.updatePayWay}
 				>
-					<FormControlLabel value="0" control={<CustomerRadio />} label="轉帳" />
-					<FormControlLabel value="1" control={<CustomerRadio />} label="貨到付款" />
+					<FormControlLabel value="3" control={<CustomerRadio />} label="test1" />
+					<FormControlLabel value="4" control={<CustomerRadio />} label="test2" />
+
 				</RadioGroup>
 			</FormControl>
 		</div>
 	);
 }
 
-PayWay.propTypes = {
+export default function addressee(props){
+	return(
+		<Grid item xs={12}>
+			<Grid item xs={12} style={ Css.gridCarTitle }>
+				<Typography variant="h5" component="p">
+				收件資料
+				</Typography>
+			</Grid>
+			<Grid container spacing={1} style={{ margin: "2% 2% 2% 4%", display: "flex", width: "-webkit-fill-available" }}>
+				<Grid item xs={12}>
+					<Typography variant="h5" component="p" style={ Css.payWay }>選擇收件人</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<AddresseeOption {...props} />
+					<AddresseeTable />
+				</Grid>
+			</Grid>
+		</Grid>
+	);
+}
+
+addressee.propTypes = {
+	FBisAuthorized:PropTypes.bool,
+};
+
+AddresseeOption.propTypes = {
 	payWay: PropTypes.string,
 	updatePayWay: PropTypes.func,
 };

@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import PayWay from "./payWayRadioButtons.jsx";
 import Tables from "./table.jsx";
+import Addressee from "./addressee.jsx";
 import FBLoginContainers from "../../containers/FBLoginContainers";
 //import Fab from "@material-ui/core/Fab";
 //import Icon from "@material-ui/core/Icon";
@@ -94,14 +95,9 @@ function Form(props){
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} style={ Css.gridCarTitle }>
-					<Typography variant="h5" component="p">
-						收件資料
-					</Typography>
-				</Grid>
 				<Grid item xs={12}>
 					{
-						(!props.FBisAuthorized && !props.isAuthorized)?<FBLoginContainers />:null
+						(!props.FBisAuthorized && !props.isAuthorized) ? <FBLoginContainers /> : <Addressee {...props}/>
 					}
 				</Grid>
 			</Grid>
