@@ -85,7 +85,7 @@ class FBLogin extends React.Component {
 			<div align="center" style={{ marginTop:"5%"}}>
 				<div 
 					className="fb-login-button"
-					data-width="100%"
+					data-width="101%"
 					data-size="large"
 					data-button-type="continue_with"
 					data-auto-logout-link="true"
