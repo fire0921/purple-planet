@@ -15,32 +15,29 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein };
+function createData(name, phone, address) {
+	return { name, phone, address };
 }
 
 const rows = [
-	createData("Cupcake", 305, 3.7, 67, 4.3),
-	createData("Donut", 452, 25.0, 51, 4.9),
-	createData("Eclair", 262, 16.0, 24, 6.0),
-	createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-	createData("Gingerbread", 356, 16.0, 49, 3.9),
-	createData("Honeycomb", 408, 3.2, 87, 6.5),
-	createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-	createData("Jelly Bean", 375, 0.0, 94, 0.0),
-	createData("KitKat", 518, 26.0, 65, 7.0),
-	createData("Lollipop", 392, 0.2, 98, 0.0),
-	createData("Marshmallow", 318, 0, 81, 2.0),
-	createData("Nougat", 360, 19.0, 9, 37.0),
-	createData("Oreo", 437, 18.0, 63, 4.0),
+	createData("Cupcake", "0989355762", "台北市信義區永吉路172巷100號10樓"),
+	createData("Dupcake", "0989355763", "台北市信義區永吉路172巷100號11樓"),
+	createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
+	createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
+	createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
+	createData("Fupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
+	createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
+	createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
+	createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
+	createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
+	createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
+	createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
+	createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
+	createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
 ];
-
-console.log(rows);
 
 function desc(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -67,11 +64,7 @@ function getSorting(order, orderBy) {
 }
 
 const headRows = [
-	{ id: "name", numeric: false, disablePadding: true, label: "Dessert (100g serving)" },
-	{ id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-	{ id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-	{ id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-	{ id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" },
+	{ id: "name", numeric: false, disablePadding: false, label: "收件人" },
 ];
 
 function EnhancedTableHead(props) {
@@ -123,19 +116,17 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
-		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1),
+		paddingLeft: theme.spacing(3),
+		paddingRight: theme.spacing(2),
 	},
 	highlight:
-    theme.palette.type === "light"
-? {
-    		color: theme.palette.secondary.main,
-    		backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-    	}
-    	: {
-    		color: theme.palette.text.primary,
-    		backgroundColor: theme.palette.secondary.dark,
-    	},
+		theme.palette.type === "light" ? {
+			color: theme.palette.secondary.main,
+			backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+		}:{
+			color: theme.palette.text.primary,
+			backgroundColor: theme.palette.secondary.dark,
+		},
 	spacer: {
 		flex: "1 1 100%",
 	},
@@ -164,7 +155,7 @@ const EnhancedTableToolbar = props => {
 					</Typography>
 				) : (
 					<Typography variant="h6" id="tableTitle">
-            Nutrition
+            選擇收件人
 					</Typography>
 				)}
 			</div>
@@ -202,7 +193,7 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(2),
 	},
 	table: {
-		minWidth: 750,
+		//minWidth: 750,
 	},
 	tableWrapper: {
 		overflowX: "auto",
@@ -215,7 +206,6 @@ export default function EnhancedTable() {
 	const [orderBy, setOrderBy] = React.useState("calories");
 	const [selected, setSelected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
-	const [dense, setDense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	function handleRequestSort(event, property) {
@@ -262,10 +252,6 @@ export default function EnhancedTable() {
 		setPage(0);
 	}
 
-	function handleChangeDense(event) {
-		setDense(event.target.checked);
-	}
-
 	const isSelected = name => selected.indexOf(name) !== -1;
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -278,7 +264,7 @@ export default function EnhancedTable() {
 					<Table
 						className={classes.table}
 						aria-labelledby="tableTitle"
-						size={dense ? "small" : "medium"}
+						size="small"
 					>
 						<EnhancedTableHead
 							numSelected={selected.length}
@@ -304,6 +290,7 @@ export default function EnhancedTable() {
 											tabIndex={-1}
 											key={row.name}
 											selected={isItemSelected}
+											style={{ maxWidth:"20px"}}
 										>
 											<TableCell padding="checkbox">
 												<Checkbox
@@ -311,13 +298,11 @@ export default function EnhancedTable() {
 													inputProps={{ "aria-labelledby": labelId }}
 												/>
 											</TableCell>
-											<TableCell component="th" id={labelId} scope="row" padding="none">
-												{row.name}
+											<TableCell component="th" id={labelId} scope="row" padding="default">
+												{row.name}<br />
+												{row.phone}<br />
+												{row.address}
 											</TableCell>
-											<TableCell align="right">{row.calories}</TableCell>
-											<TableCell align="right">{row.fat}</TableCell>
-											<TableCell align="right">{row.carbs}</TableCell>
-											<TableCell align="right">{row.protein}</TableCell>
 										</TableRow>
 									);
 								})}
@@ -345,10 +330,6 @@ export default function EnhancedTable() {
 					onChangeRowsPerPage={handleChangeRowsPerPage}
 				/>
 			</Paper>
-			<FormControlLabel
-				control={<Switch checked={dense} onChange={handleChangeDense} />}
-				label="Dense padding"
-			/>
 		</div>
 	);
 }

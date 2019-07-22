@@ -49,9 +49,6 @@ class FBLogin extends React.Component {
 	componentDidMount(){
 		document.addEventListener("FBObjectReady", this.initializeFacebookLogin);
 	}
-	componentDidUpdate(prevPorops){
-		console.log(prevPorops);
-	}
 	componentWillUnmount(){
 		document.removeEventListener("FBObjectReady", this.initializeFacebookLogin);
 	}
@@ -85,10 +82,10 @@ class FBLogin extends React.Component {
 			<div align="center" style={{ marginTop:"5%"}}>
 				<div 
 					className="fb-login-button"
-					data-width="101%"
+					data-width="100%"
 					data-size="large"
 					data-button-type="continue_with"
-					data-auto-logout-link="true"
+					data-auto-logout-link="false"
 					data-use-continue-as="false"
 				>
 				</div>

@@ -16,7 +16,7 @@ export default function requireAuthentication(Component, type) {
 		}
 
 		componentDidMount() {
-			if(!this.props.isAuthorized){
+			if(!this.props.isFBAuthorized && !this.props.isAuthorized){
 				return this.props.checkUserAuth({ browserHistory: this.props.history, authTypes: type });
 			}
 		}
@@ -61,10 +61,12 @@ export default function requireAuthentication(Component, type) {
 		history: PropTypes.object,
 		isAuthorized: PropTypes.bool,
 		checkUserAuth: PropTypes.func,
+		isFBAuthorized: PropTypes.bool,
 	};
 
 	const mapStateToProps = (state) => ({
 		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
+		isFBAuthorized: state.getIn(["FBLoginReducers", "__token", "isAuthorized"]),
 	});
 	const checkUserAuthFun = (dispatch) => ({
 		checkUserAuth:(payload) => (

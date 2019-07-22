@@ -85,7 +85,7 @@ export default {
 		}).catch((error) => {
 			console.log(error.message);
 			dispatch(authError());
-			browserHistory.push("/login");
+			//browserHistory.push("/login");
 		});
 	}
 };
