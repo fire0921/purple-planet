@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 
 class FBLogin extends React.Component {
 	componentWillMount() {
-		//fb initialize
+		//fb initialize (only test)
 		window.fbAsyncInit = function() {
 			window.FB.init({
 				appId: process.env.REACT_APP_FBID,
