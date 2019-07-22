@@ -15,28 +15,29 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
+import EditIcon from "@material-ui/icons/Create";
+import FilterListIcon from "@material-ui/icons/AddBox";
+import * as Css from "../../css/Order.js";
 
-function createData(name, phone, address) {
-	return { name, phone, address };
+function createData(id, name, phone, address) {
+	return { id, name, phone, address };
 }
 
 const rows = [
-	createData("Cupcake", "0989355762", "台北市信義區永吉路172巷100號10樓"),
-	createData("Dupcake", "0989355763", "台北市信義區永吉路172巷100號11樓"),
-	createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
-	createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
-	createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
-	createData("Fupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
-	createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
-	createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
-	createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
-	createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
-	createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
-	createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
-	createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
-	createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
+	createData("1", "林XX", "0989355762", "台北市信義區永吉路172巷100號10樓"),
+	createData("2", "呂XX", "0989355763", "台北市信義區永吉路172巷100號11樓"),
+	//createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
+	//createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
+	//createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
+	//createData("Hupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
+	//createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
+	//createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
+	//createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
+	//createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
+	//createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
+	//createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
+	//createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
+	//createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
 ];
 
 function desc(a, b, orderBy) {
@@ -79,7 +80,7 @@ function EnhancedTableHead(props) {
 				<TableCell padding="checkbox">
 					<Checkbox
 						indeterminate={numSelected > 0 && numSelected < rowCount}
-						checked={numSelected === rowCount}
+						checked={numSelected === 1}
 						onChange={onSelectAllClick}
 						inputProps={{ "aria-label": "Select all desserts" }}
 					/>
@@ -96,7 +97,16 @@ function EnhancedTableHead(props) {
 							direction={order}
 							onClick={createSortHandler(row.id)}
 						>
-							{row.label}
+							<Typography 
+								variant="h5"
+								id="tableTitle"
+								component="p" style={{ 
+									textAlign: "-webkit-Left", 
+									fontStyle: "oblique",
+									fontSize: "140%",
+								}}>
+								{row.label}
+							</Typography>
 						</TableSortLabel>
 					</TableCell>
 				))}
@@ -116,8 +126,8 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
-		paddingLeft: theme.spacing(3),
-		paddingRight: theme.spacing(2),
+		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(1),
 	},
 	highlight:
 		theme.palette.type === "light" ? {
@@ -141,6 +151,7 @@ const useToolbarStyles = makeStyles(theme => ({
 const EnhancedTableToolbar = props => {
 	const classes = useToolbarStyles();
 	const { numSelected } = props;
+	//console.log(clsx("foo", ["bar" && 1, {["baz"]:true}, ["hello", ["world"]]], "cya"));
 
 	return (
 		<Toolbar
@@ -154,17 +165,17 @@ const EnhancedTableToolbar = props => {
 						{numSelected} selected
 					</Typography>
 				) : (
-					<Typography variant="h6" id="tableTitle">
-            選擇收件人
+					<Typography variant="h5" id="tableTitle" component="p" style={ Css.payWay }>
+							選擇收件人
 					</Typography>
 				)}
 			</div>
 			<div className={classes.spacer} />
 			<div className={classes.actions}>
 				{numSelected > 0 ? (
-					<Tooltip title="Delete">
-						<IconButton aria-label="Delete">
-							<DeleteIcon />
+					<Tooltip title="Edit">
+						<IconButton aria-label="Edit">
+							<EditIcon />
 						</IconButton>
 					</Tooltip>
 				) : (
@@ -186,11 +197,12 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
-		marginTop: theme.spacing(3),
+		marginTop: theme.spacing(1),
 	},
 	paper: {
 		width: "100%",
 		marginBottom: theme.spacing(2),
+		border: "solid 1px #d1c4e9",
 	},
 	table: {
 		//minWidth: 750,
@@ -203,7 +215,7 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable() {
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
-	const [orderBy, setOrderBy] = React.useState("calories");
+	const [orderBy, setOrderBy] = React.useState("name");
 	const [selected, setSelected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -228,9 +240,10 @@ export default function EnhancedTable() {
 		let newSelected = [];
 
 		if (selectedIndex === -1) {
-			newSelected = newSelected.concat(selected, name);
+			//newSelected = newSelected.concat(selected, name);
+			newSelected = newSelected.concat(name);
 		} else if (selectedIndex === 0) {
-			newSelected = newSelected.concat(selected.slice(1));
+			//newSelected = newSelected.concat(selected.slice(1));
 		} else if (selectedIndex === selected.length - 1) {
 			newSelected = newSelected.concat(selected.slice(0, -1));
 		} else if (selectedIndex > 0) {
@@ -278,17 +291,17 @@ export default function EnhancedTable() {
 							{stableSort(rows, getSorting(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
-									const isItemSelected = isSelected(row.name);
+									const isItemSelected = isSelected(row.id);
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
 										<TableRow
 											hover
-											onClick={event => handleClick(event, row.name)}
+											onClick={event => handleClick(event, row.id)}
 											role="checkbox"
 											aria-checked={isItemSelected}
 											tabIndex={-1}
-											key={row.name}
+											key={row.name + row.id}
 											selected={isItemSelected}
 											style={{ maxWidth:"20px"}}
 										>
