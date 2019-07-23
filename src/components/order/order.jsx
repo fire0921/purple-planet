@@ -25,6 +25,27 @@ const fakeData = [
 	{"name":"黑糖綜合", "price":190}
 ];
 
+const rows = [
+	createData("1", "林XX", "0989355762", "台北市信義區永吉路172巷100號10樓"),
+	createData("2", "呂XX", "0989355763", "台北市信義區永吉路172巷100號11樓"),
+	createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
+	createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
+	createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
+	createData("Hupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
+	createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
+	createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
+	createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
+	createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
+	createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
+	//createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
+	//createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
+	//createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
+];
+
+function createData(id, name, phone, address) {
+	return { id, name, phone, address };
+}
+
 function countItemSum(obj){
 	return Object.keys(obj).reduce((sum, key) => ( sum + obj[key].count||0), 0);
 }
@@ -113,12 +134,77 @@ class Order extends React.Component {
 		this.onHandleChange = this.onHandleChange.bind(this);
 		this.onHandleAdd = this.onHandleAdd.bind(this);
 		this.createNewItem = this.createNewItem.bind(this);
+		this.handleRequestSort = this.handleRequestSort.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+		this.handleSelectAllClick = this.handleSelectAllClick.bind(this);
+		this.handleChangePage = this.handleChangePage.bind(this);
+		this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+		this.isSelected = this.isSelected.bind(this);
+
 		this.state={
-			items:{},
-			count:0,
-			total:0,
-			payWay:"0",
+			items: {},
+			count: 0,
+			total: 0,
+			payWay: "0",
+			order: "asc",
+			orderBy: "name",
+			selected: [],
+			page: 0,
+			rowsPerPage: 5,
 		};
+	}
+
+	isSelected(name) { 
+		return this.state.selected.indexOf(name) !== -1;
+	}
+
+	handleRequestSort(event, property) {
+		const isDesc = this.state.orderBy === property && this.state.order === "desc";
+		this.setState({ order: isDesc ? "asc" : "desc" });
+		this.setState({ orderBy: property });
+	}
+
+	handleSelectAllClick(event) {
+		if (event.target.checked) {
+			const newSelecteds = rows.map(n => n.name);
+			this.setState({ selected: newSelecteds });
+			return;
+		}
+		this.setState({ selected:[] });
+	}
+
+	handleClick(event, name) {
+		const selectedIndex = this.state.selected.indexOf(name);
+		let newSelected = [];
+
+		if (selectedIndex === -1) {
+			//newSelected = newSelected.concat(selected, name);
+			newSelected = newSelected.concat(name);
+		} else if (selectedIndex === 0) {
+			//newSelected = newSelected.concat(selected.slice(1));
+		} else if (selectedIndex === this.state.selected.length - 1) {
+			newSelected = newSelected.concat(this.state.selected.slice(0, -1));
+		} else if (selectedIndex > 0) {
+			newSelected = newSelected.concat(
+				this.state.selected.slice(0, selectedIndex),
+				this.state.selected.slice(selectedIndex + 1),
+			);
+		}
+
+		this.setState({ selected:newSelected });
+	}
+
+	handleChangePage(event, newPage) {
+		this.setState(() => ({
+			...this.state,
+			page: newPage,
+		}));
+	}
+
+	handleChangeRowsPerPage(event) {
+		console.log(typeof event.target.value);
+		this.setState({ rowsPerPage: event.target.value });
+		this.setState({ page:0 });
 	}
 
 	createNewItem({ name, price}){
@@ -218,6 +304,13 @@ class Order extends React.Component {
 			<div>
 				<Form 
 					fakeData={ fakeData }
+					isSelected={ this.isSelected }
+					rows={ rows }
+					handleClick={ this.handleClick }
+					handleRequestSort={ this.handleRequestSort }
+					handleSelectAllClick={ this.handleSelectAllClick }
+					handleChangePage={ this.handleChangePage }
+					handleChangeRowsPerPage={ this.handleChangeRowsPerPage }
 					onHandleChange={ this.onHandleChange }
 					onHandleAdd={ this.onHandleAdd }
 					updatePayWay={this.updatePayWay}

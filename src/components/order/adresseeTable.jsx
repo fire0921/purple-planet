@@ -19,27 +19,6 @@ import EditIcon from "@material-ui/icons/Create";
 import FilterListIcon from "@material-ui/icons/AddBox";
 import * as Css from "../../css/Order.js";
 
-function createData(id, name, phone, address) {
-	return { id, name, phone, address };
-}
-
-const rows = [
-	createData("1", "林XX", "0989355762", "台北市信義區永吉路172巷100號10樓"),
-	createData("2", "呂XX", "0989355763", "台北市信義區永吉路172巷100號11樓"),
-	//createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
-	//createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
-	//createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
-	//createData("Hupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
-	//createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
-	//createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
-	//createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
-	//createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
-	//createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
-	//createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
-	//createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
-	//createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
-];
-
 function desc(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
 		return -1;
@@ -115,15 +94,6 @@ function EnhancedTableHead(props) {
 	);
 }
 
-EnhancedTableHead.propTypes = {
-	numSelected: PropTypes.number.isRequired,
-	onRequestSort: PropTypes.func.isRequired,
-	onSelectAllClick: PropTypes.func.isRequired,
-	order: PropTypes.string.isRequired,
-	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
-};
-
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: theme.spacing(2),
@@ -190,10 +160,6 @@ const EnhancedTableToolbar = props => {
 	);
 };
 
-EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired,
-};
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -212,67 +178,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
 	const classes = useStyles();
-	const [order, setOrder] = React.useState("asc");
-	const [orderBy, setOrderBy] = React.useState("name");
-	const [selected, setSelected] = React.useState([]);
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-	function handleRequestSort(event, property) {
-		const isDesc = orderBy === property && order === "desc";
-		setOrder(isDesc ? "asc" : "desc");
-		setOrderBy(property);
-	}
-
-	function handleSelectAllClick(event) {
-		if (event.target.checked) {
-			const newSelecteds = rows.map(n => n.name);
-			setSelected(newSelecteds);
-			return;
-		}
-		setSelected([]);
-	}
-
-	function handleClick(event, name) {
-		const selectedIndex = selected.indexOf(name);
-		let newSelected = [];
-
-		if (selectedIndex === -1) {
-			//newSelected = newSelected.concat(selected, name);
-			newSelected = newSelected.concat(name);
-		} else if (selectedIndex === 0) {
-			//newSelected = newSelected.concat(selected.slice(1));
-		} else if (selectedIndex === selected.length - 1) {
-			newSelected = newSelected.concat(selected.slice(0, -1));
-		} else if (selectedIndex > 0) {
-			newSelected = newSelected.concat(
-				selected.slice(0, selectedIndex),
-				selected.slice(selectedIndex + 1),
-			);
-		}
-
-		setSelected(newSelected);
-	}
-
-	function handleChangePage(event, newPage) {
-		setPage(newPage);
-	}
-
-	function handleChangeRowsPerPage(event) {
-		setRowsPerPage(+event.target.value);
-		setPage(0);
-	}
-
-	const isSelected = name => selected.indexOf(name) !== -1;
-
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+	const emptyRows = props.rowsPerPage - Math.min(props.rowsPerPage, props.rows.length - props.page * props.rowsPerPage);
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<EnhancedTableToolbar numSelected={selected.length} />
+				<EnhancedTableToolbar numSelected={props.selected.length} />
 				<div className={classes.tableWrapper}>
 					<Table
 						className={classes.table}
@@ -280,24 +193,24 @@ export default function EnhancedTable() {
 						size="small"
 					>
 						<EnhancedTableHead
-							numSelected={selected.length}
-							order={order}
-							orderBy={orderBy}
-							onSelectAllClick={handleSelectAllClick}
-							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							numSelected={props.selected.length}
+							order={props.order}
+							orderBy={props.orderBy}
+							onSelectAllClick={props.handleSelectAllClick}
+							onRequestSort={props.handleRequestSort}
+							rowCount={props.rows.length}
 						/>
 						<TableBody>
-							{stableSort(rows, getSorting(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							{stableSort(props.rows, getSorting(props.order, props.orderBy))
+								.slice(props.page * props.rowsPerPage, props.page * props.rowsPerPage + props.rowsPerPage)
 								.map((row, index) => {
-									const isItemSelected = isSelected(row.id);
+									const isItemSelected = props.isSelected(row.id);
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
 										<TableRow
 											hover
-											onClick={event => handleClick(event, row.id)}
+											onClick={event => props.handleClick(event, row.id)}
 											role="checkbox"
 											aria-checked={isItemSelected}
 											tabIndex={-1}
@@ -330,19 +243,47 @@ export default function EnhancedTable() {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
-					count={rows.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
+					count={props.rows.length}
+					rowsPerPage={props.rowsPerPage}
+					page={props.page}
 					backIconButtonProps={{
 						"aria-label": "Previous Page",
 					}}
 					nextIconButtonProps={{
 						"aria-label": "Next Page",
 					}}
-					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
+					onChangePage={props.handleChangePage}
+					onChangeRowsPerPage={props.handleChangeRowsPerPage}
 				/>
 			</Paper>
 		</div>
 	);
 }
+
+EnhancedTable.propTypes = {
+	page: PropTypes.number,
+	rowsPerPage: PropTypes.number,
+	rows: PropTypes.array,
+	selected: PropTypes.array,
+	orderBy: PropTypes.string,
+	order: PropTypes.string,
+	handleSelectAllClick: PropTypes.func,
+	handleChangePage: PropTypes.func,
+	handleChangeRowsPerPage: PropTypes.func,
+	handleRequestSort: PropTypes.func,
+	handleClick: PropTypes.func,
+	isSelected: PropTypes.func,
+};
+
+EnhancedTableHead.propTypes = {
+	numSelected: PropTypes.number.isRequired,
+	onRequestSort: PropTypes.func.isRequired,
+	onSelectAllClick: PropTypes.func.isRequired,
+	order: PropTypes.string.isRequired,
+	orderBy: PropTypes.string.isRequired,
+	rowCount: PropTypes.number.isRequired,
+};
+
+EnhancedTableToolbar.propTypes = {
+	numSelected: PropTypes.number.isRequired,
+};
