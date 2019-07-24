@@ -16,8 +16,16 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Create";
-import FilterListIcon from "@material-ui/icons/AddBox";
+import Addbox from "@material-ui/icons/AddBox";
 import * as Css from "../../css/Order.js";
+import MuiDialog from "@material-ui/core/Dialog";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
 
 function desc(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -94,6 +102,100 @@ function EnhancedTableHead(props) {
 	);
 }
 
+const Dialog = withStyles(() => ({
+	root:{
+		"& .MuiDialog-container.MuiDialog-scrollPaper":{
+			"& .MuiPaper-root.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-rounded":{
+				borderRadius: "30px",
+				"& .MuiDialogTitle-root":{
+					padding: "16px 24px 1px",
+					"& h6 > p":{
+						fontSize: "130%",
+						color: "rgb(59, 75, 149)",
+						fontStyle: "oblique",
+						fontWeight: 600,
+						textAlign: "-webkit-center",
+						marginBottom: "0px",
+					}
+				}
+			},
+		},
+	},
+}))(MuiDialog);
+
+const DialogContent = withStyles(() => ({
+	root:{
+		padding: "1px 24px 8px 24px",
+		display: "grid",
+	}
+}))(MuiDialogContent);
+
+const DialogActions = withStyles(() => ({
+	root:{
+		padding: "8px 8px 15px 8px",
+		justifyContent: "space-around",
+	}
+}))(MuiDialogActions);
+
+function FormDialog(props) {
+	console.log(props);
+	return (
+		<div>
+			<Dialog open={props.checkOpen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+				<DialogTitle id="form-dialog-title">
+					<DialogContentText>新增收件人</DialogContentText>
+				</DialogTitle>
+				<DialogContent>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="name"
+						label="Name"
+						type="name"
+						inputProps={{ 
+							onChange: (event) => props.handleDialogChange("Name", event),
+							value: props.newAddress["Name"],
+						}}
+						fullWidth
+					/>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="Email"
+						label="Phone"
+						type="phone"
+						inputProps={{ 
+							onChange: (event) => props.handleDialogChange("Phone", event),
+							value: props.newAddress["Phone"],
+						}}
+						fullWidth
+					/>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="Address"
+						label="Address"
+						type="address"
+						inputProps={{ 
+							onChange: (event) => props.handleDialogChange("Address", event),
+							value: props.newAddress["Address"],
+						}}
+						fullWidth
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={ props.handleClose } color="primary">
+            Cancel
+					</Button>
+					<Button onClick={ props.handleDialogSubmit } color="primary">
+            Subscribe
+					</Button>
+				</DialogActions>
+			</Dialog>
+		</div>
+	);
+}
+
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: theme.spacing(2),
@@ -120,9 +222,8 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
 	const classes = useToolbarStyles();
-	const { numSelected } = props;
+	const { numSelected, handleClickOpen } = props;
 	//console.log(clsx("foo", ["bar" && 1, {["baz"]:true}, ["hello", ["world"]]], "cya"));
-
 	return (
 		<Toolbar
 			className={clsx(classes.root, {
@@ -149,16 +250,19 @@ const EnhancedTableToolbar = props => {
 						</IconButton>
 					</Tooltip>
 				) : (
-					<Tooltip title="Filter list">
-						<IconButton aria-label="Filter list">
-							<FilterListIcon />
+					<Tooltip title="Add">
+						<IconButton aria-label="Add" onClick={ handleClickOpen }>
+							<Addbox />
 						</IconButton>
 					</Tooltip>
 				)}
 			</div>
+			<FormDialog {...props}/>
 		</Toolbar>
 	);
 };
+
+
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -178,6 +282,8 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+
+
 export default function EnhancedTable(props) {
 	const classes = useStyles();
 	const emptyRows = props.rowsPerPage - Math.min(props.rowsPerPage, props.rows.length - props.page * props.rowsPerPage);
@@ -185,7 +291,7 @@ export default function EnhancedTable(props) {
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<EnhancedTableToolbar numSelected={props.selected.length} />
+				<EnhancedTableToolbar numSelected={props.selected.length}{...props}/>
 				<div className={classes.tableWrapper}>
 					<Table
 						className={classes.table}
@@ -286,4 +392,14 @@ EnhancedTableHead.propTypes = {
 
 EnhancedTableToolbar.propTypes = {
 	numSelected: PropTypes.number.isRequired,
+	handleClickOpen: PropTypes.func,
+};
+
+FormDialog.propTypes = {
+	handleClickOpen: PropTypes.func,
+	handleClose: PropTypes.func,
+	checkOpen: PropTypes.bool,
+	handleDialogChange: PropTypes.func,
+	newAddress: PropTypes.object,
+	handleDialogSubmit: PropTypes.func,
 };

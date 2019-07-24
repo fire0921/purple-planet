@@ -26,20 +26,8 @@ const fakeData = [
 ];
 
 const rows = [
-	createData("1", "林XX", "0989355762", "台北市信義區永吉路172巷100號10樓"),
-	createData("2", "呂XX", "0989355763", "台北市信義區永吉路172巷100號11樓"),
-	createData("Eupcake", "0989355764", "台北市信義區永吉路172巷100號12樓"),
-	createData("Fupcake", "0989355765", "台北市信義區永吉路172巷100號13樓"),
-	createData("Gupcake", "0989355766", "台北市信義區永吉路172巷100號14樓"),
-	createData("Hupcake", "0989355767", "台北市信義區永吉路172巷100號15樓"),
-	createData("Iupcake", "0989355768", "台北市信義區永吉路172巷100號16樓"),
-	createData("Jupcake", "0989355769", "台北市信義區永吉路172巷100號17樓"),
-	createData("Kupcake", "0989355770", "台北市信義區永吉路172巷100號18樓"),
-	createData("Lupcake", "0989355771", "台北市信義區永吉路172巷100號19樓"),
-	createData("Mupcake", "0989355772", "台北市信義區永吉路172巷100號20樓"),
-	//createData("Nupcake", "0989355773", "台北市信義區永吉路172巷100號21樓"),
-	//createData("Oupcake", "0989355774", "台北市信義區永吉路172巷100號22樓"),
-	//createData("Pupcake", "0989355775", "台北市信義區永吉路172巷100號23樓"),
+	createData("1", "林XX", "0989355234", "台北市信義區永吉路172巷100號10樓"),
+	createData("2", "呂XX", "0989352341", "台北市信義區永吉路172巷100號11樓"),
 ];
 
 function createData(id, name, phone, address) {
@@ -140,6 +128,10 @@ class Order extends React.Component {
 		this.handleChangePage = this.handleChangePage.bind(this);
 		this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
 		this.isSelected = this.isSelected.bind(this);
+		this.handleClickOpen = this.handleClickOpen.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+		this.handleDialogChange = this.handleDialogChange.bind(this);
+		this.handleDialogSubmit = this.handleDialogSubmit.bind(this);
 
 		this.state={
 			items: {},
@@ -151,7 +143,41 @@ class Order extends React.Component {
 			selected: [],
 			page: 0,
 			rowsPerPage: 5,
+			checkOpen: false,
+			rows: rows,
+			newAddress:{},
 		};
+	}
+
+	handleClickOpen() {
+		this.setState({ checkOpen:true });
+	}
+
+	handleClose() {
+		this.setState({ checkOpen:false });
+	}
+
+	handleDialogChange(name, event){
+		event.persist();
+		this.setState(() => ({
+			newAddress:{
+				...this.state.newAddress,
+				[name]: event.target.value,
+			},
+		}));
+	}
+
+	handleDialogSubmit(){
+		this.setState({
+			rows: this.state.rows.concat([{
+				id: this.state.newAddress["Name"] + new Date().getTime().toString(),
+				name: this.state.newAddress["Name"],
+				phone: this.state.newAddress["Phone"],
+				address: this.state.newAddress["Address"],
+			}])
+		});
+
+		this.setState({ checkOpen:false });
 	}
 
 	isSelected(name) { 
@@ -165,6 +191,7 @@ class Order extends React.Component {
 	}
 
 	handleSelectAllClick(event) {
+		event.persist();
 		if (event.target.checked) {
 			const newSelecteds = rows.map(n => n.name);
 			this.setState({ selected: newSelecteds });
@@ -195,6 +222,7 @@ class Order extends React.Component {
 	}
 
 	handleChangePage(event, newPage) {
+		event.persist();
 		this.setState(() => ({
 			...this.state,
 			page: newPage,
@@ -202,7 +230,7 @@ class Order extends React.Component {
 	}
 
 	handleChangeRowsPerPage(event) {
-		console.log(typeof event.target.value);
+		event.persist();
 		this.setState({ rowsPerPage: event.target.value });
 		this.setState({ page:0 });
 	}
@@ -305,7 +333,8 @@ class Order extends React.Component {
 				<Form 
 					fakeData={ fakeData }
 					isSelected={ this.isSelected }
-					rows={ rows }
+					handleClickOpen={ this.handleClickOpen }
+					handleClose={ this.handleClose }
 					handleClick={ this.handleClick }
 					handleRequestSort={ this.handleRequestSort }
 					handleSelectAllClick={ this.handleSelectAllClick }
@@ -313,8 +342,10 @@ class Order extends React.Component {
 					handleChangeRowsPerPage={ this.handleChangeRowsPerPage }
 					onHandleChange={ this.onHandleChange }
 					onHandleAdd={ this.onHandleAdd }
-					updatePayWay={this.updatePayWay}
-					onHandleRemove={this.onHandleRemove}
+					updatePayWay={ this.updatePayWay }
+					onHandleRemove={ this.onHandleRemove }
+					handleDialogChange={ this.handleDialogChange }
+					handleDialogSubmit={ this.handleDialogSubmit }
 					{...this.state}
 					{...this.props}
 				/>

@@ -4,61 +4,6 @@ import * as Css from "../../css/Order.js";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import AddresseeTable from "./adresseeTable.jsx";
-//import { withStyles, makeStyles } from "@material-ui/core/styles";
-//import Radio from "@material-ui/core/Radio";
-//import RadioGroup from "@material-ui/core/RadioGroup";
-//import FormControlLabel from "@material-ui/core/FormControlLabel";
-//import FormControl from "@material-ui/core/FormControl";
-
-/*
-const CustomerRadio = withStyles({
-	root: {
-		"&$checked": {
-			color: "#a800f5",
-		},
-	},
-	checked: {},
-})(props => <Radio color="default" {...props} />);
-
-const useStyles = makeStyles(theme => ({
-	root: {
-		padding: theme.spacing(1),
-		border: "1.5px solid #d1c4e9",
-		borderRadius: 15,
-	},
-	formControl: {
-		marginLeft: theme.spacing(1),
-	},
-	group: {
-		display: "flex",
-		flexWrap: "wrap",
-		flexDirection: "column",
-		margin: theme.spacing(0, 0),
-	},
-}));
-
-function AddresseeOption(props) {
-	const classes = useStyles();
-
-	return (
-		<div className={classes.root}>
-			<FormControl component="fieldset" className={classes.formControl}>
-				<RadioGroup
-					aria-label="Gender"
-					name="gender1"
-					className={classes.group}
-					value={props.payWay}
-					onChange={props.updatePayWay}
-				>
-					<FormControlLabel value="3" control={<CustomerRadio />} label="test1" />
-					<FormControlLabel value="4" control={<CustomerRadio />} label="test2" />
-
-				</RadioGroup>
-			</FormControl>
-		</div>
-	);
-}
-*/
 
 export default function addressee(props){
 	return(
