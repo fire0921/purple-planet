@@ -69,6 +69,7 @@ function EnhancedTableHead(props) {
 						indeterminate={numSelected > 0 && numSelected < rowCount}
 						checked={numSelected === 1}
 						onChange={onSelectAllClick}
+						disabled={true}
 						inputProps={{ "aria-label": "Select all desserts" }}
 					/>
 				</TableCell>
@@ -143,7 +144,7 @@ function FormDialog(props) {
 		<div>
 			<Dialog open={props.checkOpen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">
-					<DialogContentText>新增收件人</DialogContentText>
+					<DialogContentText>{ (props.dialogType==="edit")?"修改收件人":"新增收件人" }</DialogContentText>
 				</DialogTitle>
 				<DialogContent>
 					<TextField
@@ -153,32 +154,30 @@ function FormDialog(props) {
 						label="Name"
 						type="name"
 						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("Name", event),
-							value: props.newAddress["Name"],
+							onChange: (event) => props.handleDialogChange("name", event),
+							defaultValue: props.newAddress["name"],
 						}}
 						fullWidth
 					/>
 					<TextField
-						autoFocus
 						margin="dense"
 						id="Email"
 						label="Phone"
 						type="phone"
 						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("Phone", event),
-							value: props.newAddress["Phone"],
+							onChange: (event) => props.handleDialogChange("phone", event),
+							defaultValue: props.newAddress["phone"],
 						}}
 						fullWidth
 					/>
 					<TextField
-						autoFocus
 						margin="dense"
 						id="Address"
 						label="Address"
 						type="address"
 						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("Address", event),
-							value: props.newAddress["Address"],
+							onChange: (event) => props.handleDialogChange("address", event),
+							defaultValue: props.newAddress["address"],
 						}}
 						fullWidth
 					/>
@@ -187,7 +186,7 @@ function FormDialog(props) {
 					<Button onClick={ props.handleClose } color="primary">
             Cancel
 					</Button>
-					<Button onClick={ props.handleDialogSubmit } color="primary">
+					<Button onClick={ (props.dialogType === "edit")?props.handleEditSubmit:props.handleDialogSubmit } color="primary">
             Subscribe
 					</Button>
 				</DialogActions>
@@ -222,7 +221,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
 	const classes = useToolbarStyles();
-	const { numSelected, handleClickOpen } = props;
+	const { numSelected, handleClickOpen, handleEditOpen } = props;
 	//console.log(clsx("foo", ["bar" && 1, {["baz"]:true}, ["hello", ["world"]]], "cya"));
 	return (
 		<Toolbar
@@ -245,7 +244,7 @@ const EnhancedTableToolbar = props => {
 			<div className={classes.actions}>
 				{numSelected > 0 ? (
 					<Tooltip title="Edit">
-						<IconButton aria-label="Edit">
+						<IconButton aria-label="Edit" onClick={ handleEditOpen }>
 							<EditIcon />
 						</IconButton>
 					</Tooltip>
@@ -349,6 +348,7 @@ export default function EnhancedTable(props) {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
+					labelRowsPerPage="Rows"
 					count={props.rows.length}
 					rowsPerPage={props.rowsPerPage}
 					page={props.page}
@@ -393,6 +393,7 @@ EnhancedTableHead.propTypes = {
 EnhancedTableToolbar.propTypes = {
 	numSelected: PropTypes.number.isRequired,
 	handleClickOpen: PropTypes.func,
+	handleEditOpen: PropTypes.func,
 };
 
 FormDialog.propTypes = {
@@ -402,4 +403,6 @@ FormDialog.propTypes = {
 	handleDialogChange: PropTypes.func,
 	newAddress: PropTypes.object,
 	handleDialogSubmit: PropTypes.func,
+	dialogType: PropTypes.string,
+	handleEditSubmit: PropTypes.func,
 };
