@@ -48,15 +48,24 @@ function stableSort(array, cmp) {
 }
 
 function getSorting(order, orderBy) {
-	return order === "desc" ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+	return order === "desc"
+		? (a, b) => desc(a, b, orderBy)
+		: (a, b) => -desc(a, b, orderBy);
 }
 
 const headRows = [
-	{ id: "name", numeric: false, disablePadding: false, label: "收件人" },
+	{ id: "name", numeric: false, disablePadding: false, label: "收件人" }
 ];
 
 function EnhancedTableHead(props) {
-	const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+	const {
+		onSelectAllClick,
+		order,
+		orderBy,
+		numSelected,
+		rowCount,
+		onRequestSort
+	} = props;
 	const createSortHandler = property => event => {
 		onRequestSort(event, property);
 	};
@@ -85,14 +94,16 @@ function EnhancedTableHead(props) {
 							direction={order}
 							onClick={createSortHandler(row.id)}
 						>
-							<Typography 
+							<Typography
 								variant="h5"
 								id="tableTitle"
-								component="p" style={{ 
-									textAlign: "-webkit-Left", 
+								component="p"
+								style={{
+									textAlign: "-webkit-Left",
 									fontStyle: "oblique",
-									fontSize: "140%",
-								}}>
+									fontSize: "140%"
+								}}
+							>
 								{row.label}
 							</Typography>
 						</TableSortLabel>
@@ -104,37 +115,37 @@ function EnhancedTableHead(props) {
 }
 
 const Dialog = withStyles(() => ({
-	root:{
-		"& .MuiDialog-container.MuiDialog-scrollPaper":{
-			"& .MuiPaper-root.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-rounded":{
+	root: {
+		"& .MuiDialog-container.MuiDialog-scrollPaper": {
+			"& .MuiPaper-root.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-rounded": {
 				borderRadius: "30px",
-				"& .MuiDialogTitle-root":{
+				"& .MuiDialogTitle-root": {
 					padding: "16px 24px 1px",
-					"& h6 > p":{
+					"& h6 > p": {
 						fontSize: "130%",
 						color: "rgb(59, 75, 149)",
 						fontStyle: "oblique",
 						fontWeight: 600,
 						textAlign: "-webkit-center",
-						marginBottom: "0px",
+						marginBottom: "0px"
 					}
 				}
-			},
-		},
-	},
+			}
+		}
+	}
 }))(MuiDialog);
 
 const DialogContent = withStyles(() => ({
-	root:{
+	root: {
 		padding: "1px 24px 8px 24px",
-		display: "grid",
+		display: "grid"
 	}
 }))(MuiDialogContent);
 
 const DialogActions = withStyles(() => ({
-	root:{
+	root: {
 		padding: "8px 8px 15px 8px",
-		justifyContent: "space-around",
+		justifyContent: "space-around"
 	}
 }))(MuiDialogActions);
 
@@ -142,9 +153,15 @@ function FormDialog(props) {
 	console.log(props);
 	return (
 		<div>
-			<Dialog open={props.checkOpen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+			<Dialog
+				open={props.checkOpen}
+				onClose={props.handleClose}
+				aria-labelledby="form-dialog-title"
+			>
 				<DialogTitle id="form-dialog-title">
-					<DialogContentText>{ (props.dialogType==="edit")?"修改收件人":"新增收件人" }</DialogContentText>
+					<DialogContentText>
+						{props.dialogType === "edit" ? "修改收件人" : "新增收件人"}
+					</DialogContentText>
 				</DialogTitle>
 				<DialogContent>
 					<TextField
@@ -153,9 +170,9 @@ function FormDialog(props) {
 						id="name"
 						label="Name"
 						type="name"
-						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("name", event),
-							defaultValue: props.newAddress["name"],
+						inputProps={{
+							onChange: event => props.handleDialogChange("name", event),
+							defaultValue: props.newAddress["name"]
 						}}
 						fullWidth
 					/>
@@ -164,9 +181,9 @@ function FormDialog(props) {
 						id="Email"
 						label="Phone"
 						type="phone"
-						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("phone", event),
-							defaultValue: props.newAddress["phone"],
+						inputProps={{
+							onChange: event => props.handleDialogChange("phone", event),
+							defaultValue: props.newAddress["phone"]
 						}}
 						fullWidth
 					/>
@@ -175,19 +192,26 @@ function FormDialog(props) {
 						id="Address"
 						label="Address"
 						type="address"
-						inputProps={{ 
-							onChange: (event) => props.handleDialogChange("address", event),
-							defaultValue: props.newAddress["address"],
+						inputProps={{
+							onChange: event => props.handleDialogChange("address", event),
+							defaultValue: props.newAddress["address"]
 						}}
 						fullWidth
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={ props.handleClose } color="primary">
-            Cancel
+					<Button onClick={props.handleClose} color="primary">
+						Cancel
 					</Button>
-					<Button onClick={ (props.dialogType === "edit")?props.handleEditSubmit:props.handleDialogSubmit } color="primary">
-            Subscribe
+					<Button
+						onClick={
+							props.dialogType === "edit"
+								? props.handleEditSubmit
+								: props.handleDialogSubmit
+						}
+						color="primary"
+					>
+						Subscribe
 					</Button>
 				</DialogActions>
 			</Dialog>
@@ -198,25 +222,27 @@ function FormDialog(props) {
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1),
+		paddingRight: theme.spacing(1)
 	},
 	highlight:
-		theme.palette.type === "light" ? {
-			color: theme.palette.secondary.main,
-			backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-		}:{
-			color: theme.palette.text.primary,
-			backgroundColor: theme.palette.secondary.dark,
-		},
+		theme.palette.type === "light"
+			? {
+					color: theme.palette.secondary.main,
+					backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+			  }
+			: {
+					color: theme.palette.text.primary,
+					backgroundColor: theme.palette.secondary.dark
+			  },
 	spacer: {
-		flex: "1 1 100%",
+		flex: "1 1 100%"
 	},
 	actions: {
-		color: theme.palette.text.secondary,
+		color: theme.palette.text.secondary
 	},
 	title: {
-		flex: "0 0 auto",
-	},
+		flex: "0 0 auto"
+	}
 }));
 
 const EnhancedTableToolbar = props => {
@@ -226,7 +252,7 @@ const EnhancedTableToolbar = props => {
 	return (
 		<Toolbar
 			className={clsx(classes.root, {
-				[classes.highlight]: numSelected > 0,
+				[classes.highlight]: numSelected > 0
 			})}
 		>
 			<div className={classes.title}>
@@ -235,8 +261,13 @@ const EnhancedTableToolbar = props => {
 						{numSelected} selected
 					</Typography>
 				) : (
-					<Typography variant="h5" id="tableTitle" component="p" style={ Css.payWay }>
-							選擇收件人
+					<Typography
+						variant="h5"
+						id="tableTitle"
+						component="p"
+						style={Css.payWay}
+					>
+						選擇收件人
 					</Typography>
 				)}
 			</div>
@@ -244,53 +275,54 @@ const EnhancedTableToolbar = props => {
 			<div className={classes.actions}>
 				{numSelected > 0 ? (
 					<Tooltip title="Edit">
-						<IconButton aria-label="Edit" onClick={ handleEditOpen }>
+						<IconButton aria-label="Edit" onClick={handleEditOpen}>
 							<EditIcon />
 						</IconButton>
 					</Tooltip>
 				) : (
 					<Tooltip title="Add">
-						<IconButton aria-label="Add" onClick={ handleClickOpen }>
+						<IconButton aria-label="Add" onClick={handleClickOpen}>
 							<Addbox />
 						</IconButton>
 					</Tooltip>
 				)}
 			</div>
-			<FormDialog {...props}/>
+			<FormDialog {...props} />
 		</Toolbar>
 	);
 };
 
-
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
-		marginTop: theme.spacing(1),
+		marginTop: theme.spacing(1)
 	},
 	paper: {
 		width: "100%",
 		marginBottom: theme.spacing(2),
-		border: "solid 1px #d1c4e9",
+		border: "solid 1px #d1c4e9"
 	},
 	table: {
 		//minWidth: 750,
 	},
 	tableWrapper: {
-		overflowX: "auto",
-	},
+		overflowX: "auto"
+	}
 }));
-
-
 
 export default function EnhancedTable(props) {
 	const classes = useStyles();
-	const emptyRows = props.rowsPerPage - Math.min(props.rowsPerPage, props.rows.length - props.page * props.rowsPerPage);
+	const emptyRows =
+		props.rowsPerPage -
+		Math.min(
+			props.rowsPerPage,
+			props.rows.length - props.page * props.rowsPerPage
+		);
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<EnhancedTableToolbar numSelected={props.selected.length}{...props}/>
+				<EnhancedTableToolbar numSelected={props.selected.length} {...props} />
 				<div className={classes.tableWrapper}>
 					<Table
 						className={classes.table}
@@ -307,7 +339,10 @@ export default function EnhancedTable(props) {
 						/>
 						<TableBody>
 							{stableSort(props.rows, getSorting(props.order, props.orderBy))
-								.slice(props.page * props.rowsPerPage, props.page * props.rowsPerPage + props.rowsPerPage)
+								.slice(
+									props.page * props.rowsPerPage,
+									props.page * props.rowsPerPage + props.rowsPerPage
+								)
 								.map((row, index) => {
 									const isItemSelected = props.isSelected(row.id);
 									const labelId = `enhanced-table-checkbox-${index}`;
@@ -321,7 +356,7 @@ export default function EnhancedTable(props) {
 											tabIndex={-1}
 											key={row.name + row.id}
 											selected={isItemSelected}
-											style={{ maxWidth:"20px"}}
+											style={{ maxWidth: "20px" }}
 										>
 											<TableCell padding="checkbox">
 												<Checkbox
@@ -329,9 +364,16 @@ export default function EnhancedTable(props) {
 													inputProps={{ "aria-labelledby": labelId }}
 												/>
 											</TableCell>
-											<TableCell component="th" id={labelId} scope="row" padding="default">
-												{row.name}<br />
-												{row.phone}<br />
+											<TableCell
+												component="th"
+												id={labelId}
+												scope="row"
+												padding="default"
+											>
+												{row.name}
+												<br />
+												{row.phone}
+												<br />
 												{row.address}
 											</TableCell>
 										</TableRow>
@@ -353,10 +395,10 @@ export default function EnhancedTable(props) {
 					rowsPerPage={props.rowsPerPage}
 					page={props.page}
 					backIconButtonProps={{
-						"aria-label": "Previous Page",
+						"aria-label": "Previous Page"
 					}}
 					nextIconButtonProps={{
-						"aria-label": "Next Page",
+						"aria-label": "Next Page"
 					}}
 					onChangePage={props.handleChangePage}
 					onChangeRowsPerPage={props.handleChangeRowsPerPage}
@@ -378,7 +420,7 @@ EnhancedTable.propTypes = {
 	handleChangeRowsPerPage: PropTypes.func,
 	handleRequestSort: PropTypes.func,
 	handleClick: PropTypes.func,
-	isSelected: PropTypes.func,
+	isSelected: PropTypes.func
 };
 
 EnhancedTableHead.propTypes = {
@@ -387,13 +429,13 @@ EnhancedTableHead.propTypes = {
 	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.string.isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
+	rowCount: PropTypes.number.isRequired
 };
 
 EnhancedTableToolbar.propTypes = {
 	numSelected: PropTypes.number.isRequired,
 	handleClickOpen: PropTypes.func,
-	handleEditOpen: PropTypes.func,
+	handleEditOpen: PropTypes.func
 };
 
 FormDialog.propTypes = {
@@ -404,5 +446,5 @@ FormDialog.propTypes = {
 	newAddress: PropTypes.object,
 	handleDialogSubmit: PropTypes.func,
 	dialogType: PropTypes.string,
-	handleEditSubmit: PropTypes.func,
+	handleEditSubmit: PropTypes.func
 };

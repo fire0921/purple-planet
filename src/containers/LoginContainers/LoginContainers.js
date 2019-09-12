@@ -1,23 +1,21 @@
 import { connect } from "react-redux";
 import Login from "../../components/login.jsx";
-import { LoginInfo, checkAuth, LoginBtnAction } from "../../actions/LoginAction";
+import {
+	LoginInfo,
+	checkAuth,
+	LoginBtnAction
+} from "../../actions/LoginAction";
 
 export default connect(
-	(state) => ({
+	state => ({
 		PhoneNumber: state.getIn(["LoginReducers", "PhoneNumber"]),
 		Password: state.getIn(["LoginReducers", "Password"]),
-		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
+		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"])
 	}),
-	(dispatch) => ({
-		onHandleChange: (index) => (
-			dispatch(LoginInfo(index))
-		),
-		onHandleSubmit: (browserHistory, phone, password) => (
-			dispatch(LoginBtnAction(dispatch, browserHistory, phone, password))
-		),
-		checkUserAuth: () => (
-			dispatch(checkAuth(dispatch))
-		),
+	dispatch => ({
+		onHandleChange: index => dispatch(LoginInfo(index)),
+		onHandleSubmit: (browserHistory, phone, password) =>
+			dispatch(LoginBtnAction(dispatch, browserHistory, phone, password)),
+		checkUserAuth: () => dispatch(checkAuth(dispatch))
 	})
 )(Login);
-

@@ -15,19 +15,19 @@ import FBLoginContainers from "../../containers/FBLoginContainers";
 //import AddIcon from "@material-ui/icons/Add";
 
 const fakeData = [
-	{ "name": "黑糖老薑", "price": 190 },
-	{ "name": "黑糖紅棗", "price": 190 },
-	{ "name": "黑糖四合一", "price": 190 },
-	{ "name": "黑糖蔓越莓", "price": 190 },
-	{ "name": "黑糖玫瑰", "price": 190 },
-	{ "name": "黑糖金桔", "price": 180 },
-	{ "name": "黑糖四物", "price": 190 },
-	{ "name": "黑糖綜合", "price": 190 }
+	{ name: "黑糖老薑", price: 190 },
+	{ name: "黑糖紅棗", price: 190 },
+	{ name: "黑糖四合一", price: 190 },
+	{ name: "黑糖蔓越莓", price: 190 },
+	{ name: "黑糖玫瑰", price: 190 },
+	{ name: "黑糖金桔", price: 180 },
+	{ name: "黑糖四物", price: 190 },
+	{ name: "黑糖綜合", price: 190 }
 ];
 
 const rows = [
 	createData("1", "林XX", "0989355234", "台北市信義區永吉路172巷100號10樓"),
-	createData("2", "呂XX", "0989352341", "台北市信義區永吉路172巷100號11樓"),
+	createData("2", "呂XX", "0989352341", "台北市信義區永吉路172巷100號11樓")
 ];
 
 function createData(id, name, phone, address) {
@@ -35,11 +35,14 @@ function createData(id, name, phone, address) {
 }
 
 function countItemSum(obj) {
-	return Object.keys(obj).reduce((sum, key) => (sum + obj[key].count || 0), 0);
+	return Object.keys(obj).reduce((sum, key) => sum + obj[key].count || 0, 0);
 }
 
 function totalMoneySum(obj) {
-	return Object.keys(obj).reduce((sum, key) => (sum + obj[key].count * obj[key].price || 0), 0);
+	return Object.keys(obj).reduce(
+		(sum, key) => sum + obj[key].count * obj[key].price || 0,
+		0
+	);
 }
 
 function Form(props) {
@@ -78,13 +81,39 @@ function Form(props) {
 								<Grid item xs={12} style={Css.tableBorder}>
 									<Tables {...props} />
 								</Grid>
-								<Grid item xs={6} style={Object.assign({}, Css.tableTextCount, Css.paddingT("2%"))}>
+								<Grid
+									item
+									xs={6}
+									style={Object.assign(
+										{},
+										Css.tableTextCount,
+										Css.paddingT("2%")
+									)}
+								>
 									小計
 								</Grid>
-								<Grid item xs={4} style={Object.assign({}, Css.tableTextCount, Css.paddingL("8%"), Css.paddingT("2%"))}>
+								<Grid
+									item
+									xs={4}
+									style={Object.assign(
+										{},
+										Css.tableTextCount,
+										Css.paddingL("8%"),
+										Css.paddingT("2%")
+									)}
+								>
 									{props.count}
 								</Grid>
-								<Grid item xs={1} style={Object.assign({}, Css.tableTextCountLong(props.total.toString()), Css.paddingT("2%"), Css.paddingL("3%"))}>
+								<Grid
+									item
+									xs={1}
+									style={Object.assign(
+										{},
+										Css.tableTextCountLong(props.total.toString()),
+										Css.paddingT("2%"),
+										Css.paddingL("3%")
+									)}
+								>
 									{"$" + props.total.toString()}
 								</Grid>
 								<Grid item xs={12} style={Css.paddingT("1%")}>
@@ -105,9 +134,11 @@ function Form(props) {
 					</Grid>
 				</Grid>
 				<Grid item xs={12}>
-					{
-						(!props.FBisAuthorized && !props.isAuthorized) ? <FBLoginContainers /> : <Addressee {...props} />
-					}
+					{!props.FBisAuthorized && !props.isAuthorized ? (
+						<FBLoginContainers />
+					) : (
+						<Addressee {...props} />
+					)}
 				</Grid>
 			</Grid>
 		</div>
@@ -149,24 +180,26 @@ class Order extends React.Component {
 			checkOpen: false,
 			rows: rows,
 			newAddress: {},
-			dialogType: "",
+			dialogType: ""
 		};
 	}
 
 	handleEditSubmit() {
 		const updateItem = this.state.newAddress;
 
-		this.setState((prevState) => ({
-			rows: prevState.rows.map((el) => (
-				el.id === this.state.selected[0]?{
-					...el,
-					name: updateItem.name,
-					phone: updateItem.phone,
-					address: updateItem.address,
-				}: el
-			)),
+		this.setState(prevState => ({
+			rows: prevState.rows.map(el =>
+				el.id === this.state.selected[0]
+					? {
+							...el,
+							name: updateItem.name,
+							phone: updateItem.phone,
+							address: updateItem.address
+					  }
+					: el
+			),
 			newAddress: {},
-			checkOpen: false,
+			checkOpen: false
 		}));
 	}
 
@@ -177,15 +210,16 @@ class Order extends React.Component {
 	handleEditOpen() {
 		const editItems = [];
 		if (this.state.selected.length > 0) {
-			this.state.rows.forEach((el) => {
+			this.state.rows.forEach(el => {
 				if (el.id === this.state.selected[0]) {
 					editItems.push(el);
 				}
 			});
 			this.setState({
 				newAddress: editItems[0],
-				checkOpen: true, dialogType: "edit",
-				editItem: editItems[0],
+				checkOpen: true,
+				dialogType: "edit",
+				editItem: editItems[0]
 			});
 		}
 	}
@@ -199,23 +233,25 @@ class Order extends React.Component {
 		this.setState(() => ({
 			newAddress: {
 				...this.state.newAddress,
-				[name]: event.target.value,
-			},
+				[name]: event.target.value
+			}
 		}));
 	}
 
 	handleDialogSubmit() {
 		this.setState({
-			rows: this.state.rows.concat([{
-				id: this.state.newAddress["name"] + new Date().getTime().toString(),
-				name: this.state.newAddress["name"],
-				phone: this.state.newAddress["phone"],
-				address: this.state.newAddress["address"],
-			}])
+			rows: this.state.rows.concat([
+				{
+					id: this.state.newAddress["name"] + new Date().getTime().toString(),
+					name: this.state.newAddress["name"],
+					phone: this.state.newAddress["phone"],
+					address: this.state.newAddress["address"]
+				}
+			])
 		});
 		this.setState({
 			newAddress: {},
-			checkOpen: false,
+			checkOpen: false
 		});
 	}
 
@@ -224,7 +260,8 @@ class Order extends React.Component {
 	}
 
 	handleRequestSort(event, property) {
-		const isDesc = this.state.orderBy === property && this.state.order === "desc";
+		const isDesc =
+			this.state.orderBy === property && this.state.order === "desc";
 		this.setState({ order: isDesc ? "asc" : "desc" });
 		this.setState({ orderBy: property });
 	}
@@ -253,7 +290,7 @@ class Order extends React.Component {
 		} else if (selectedIndex > 0) {
 			newSelected = newSelected.concat(
 				this.state.selected.slice(0, selectedIndex),
-				this.state.selected.slice(selectedIndex + 1),
+				this.state.selected.slice(selectedIndex + 1)
 			);
 		}
 
@@ -264,7 +301,7 @@ class Order extends React.Component {
 		event.persist();
 		this.setState(() => ({
 			...this.state,
-			page: newPage,
+			page: newPage
 		}));
 	}
 
@@ -280,8 +317,8 @@ class Order extends React.Component {
 				...this.state.items,
 				[name]: {
 					...this.state.items[name],
-					"count": 0,
-					"price": price,
+					count: 0,
+					price: price
 				}
 			}
 		}));
@@ -298,8 +335,10 @@ class Order extends React.Component {
 				...this.state.items,
 				[name]: {
 					...this.state.items[name],
-					"count": (!this.state.items[name]) ? 1 : this.state.items[name]["count"] + 1,
-					"price": price,
+					count: !this.state.items[name]
+						? 1
+						: this.state.items[name]["count"] + 1,
+					price: price
 				}
 			}
 		}));
@@ -314,8 +353,10 @@ class Order extends React.Component {
 				...this.state.items,
 				[name]: {
 					...this.state.items[name],
-					"count": (!this.state.items[name]) ? 0 : this.state.items[name]["count"] - 1,
-					"price": price,
+					count: !this.state.items[name]
+						? 0
+						: this.state.items[name]["count"] - 1,
+					price: price
 				}
 			}
 		}));
@@ -323,7 +364,7 @@ class Order extends React.Component {
 
 	updatePayWay(event) {
 		event.persist();
-		this.setState({ "payWay": event.target.value });
+		this.setState({ payWay: event.target.value });
 	}
 
 	onHandleChange({ name, price }, event) {
@@ -334,14 +375,11 @@ class Order extends React.Component {
 		if (event.target.value >= 100) {
 			alert("to much!!");
 			return;
-
 		} else if (event.target.value === "") {
 			event.target.value = 0;
-
 		} else if (resultMatch) {
 			event.target.value = 0;
 			alert("請輸入整數");
-
 		}
 
 		this.setState(() => ({
@@ -349,17 +387,17 @@ class Order extends React.Component {
 				...this.state.items,
 				[name]: {
 					...this.state.items[name],
-					"count": parseInt(event.target.value),
-					"price": price,
+					count: parseInt(event.target.value),
+					price: price
 				}
-			},
+			}
 		}));
 	}
 
 	static getDerivedStateFromProps(props, state) {
 		return {
 			count: countItemSum(state.items),
-			total: totalMoneySum(state.items),
+			total: totalMoneySum(state.items)
 		};
 	}
 
@@ -397,14 +435,12 @@ Form.propTypes = {
 	count: PropTypes.number,
 	total: PropTypes.number,
 	FBisAuthorized: PropTypes.bool,
-	isAuthorized: PropTypes.bool,
+	isAuthorized: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	FBisAuthorized: state.getIn(["FBLoginReducers", "__token", "isAuthorized"]),
-	isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
-
+	isAuthorized: state.getIn(["LoginReducers", "isAuthorized"])
 });
-
 
 export default connect(mapStateToProps)(withRouter(Order));

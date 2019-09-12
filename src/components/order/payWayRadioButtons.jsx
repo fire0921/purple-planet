@@ -11,27 +11,27 @@ import FormControl from "@material-ui/core/FormControl";
 const CustomerRadio = withStyles({
 	root: {
 		"&$checked": {
-			color: "#a800f5",
-		},
+			color: "#a800f5"
+		}
 	},
-	checked: {},
+	checked: {}
 })(props => <Radio color="default" {...props} />);
 
 const useStyles = makeStyles(theme => ({
 	root: {
 		padding: theme.spacing(1),
 		border: "1.5px solid #d1c4e9",
-		borderRadius: 15,
+		borderRadius: 15
 	},
 	formControl: {
-		marginLeft: theme.spacing(1),
+		marginLeft: theme.spacing(1)
 	},
 	group: {
 		display: "flex",
 		flexWrap: "wrap",
 		flexDirection: "row",
-		margin: theme.spacing(0, 0),
-	},
+		margin: theme.spacing(0, 0)
+	}
 }));
 
 export default function PayWay(props) {
@@ -47,8 +47,16 @@ export default function PayWay(props) {
 					value={props.payWay}
 					onChange={props.updatePayWay}
 				>
-					<FormControlLabel value="0" control={<CustomerRadio />} label="轉帳" />
-					<FormControlLabel value="1" control={<CustomerRadio />} label="貨到付款" />
+					<FormControlLabel
+						value="0"
+						control={<CustomerRadio />}
+						label="轉帳"
+					/>
+					<FormControlLabel
+						value="1"
+						control={<CustomerRadio />}
+						label="貨到付款"
+					/>
 				</RadioGroup>
 			</FormControl>
 		</div>
@@ -57,5 +65,5 @@ export default function PayWay(props) {
 
 PayWay.propTypes = {
 	payWay: PropTypes.string,
-	updatePayWay: PropTypes.func,
+	updatePayWay: PropTypes.func
 };

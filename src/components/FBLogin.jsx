@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import * as cssLogin from "../css/login_css.js";
 import { withRouter } from "react-router-dom";
 
-
 class FBLogin extends React.Component {
 	componentWillMount() {
 		//fb initialize (only test)
@@ -13,9 +12,9 @@ class FBLogin extends React.Component {
 			window.FB.init({
 				appId: process.env.REACT_APP_FBID,
 				status: true,
-				cookie: true,  // enable cookies to allow the server to access
+				cookie: true, // enable cookies to allow the server to access
 				// the session
-				xfbml: true,	// parse social plugins on this page
+				xfbml: true, // parse social plugins on this page
 				version: "v3.3" // The Graph API version to use for the call
 			});
 
@@ -31,36 +30,51 @@ class FBLogin extends React.Component {
 			//
 			// These three cases are handled in the callback function.
 		};
-		(function(d, s, id){
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
+		(function(d, s, id) {
+			var js,
+				fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
 			js.src = "https://connect.facebook.net/zh_TW/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
-		}(document, "script", "facebook-jssdk"));
-
+		})(document, "script", "facebook-jssdk");
 	}
 	render() {
-		
 		const FBLogin = () => {
-			window.FB.login((res) => {
-				this.props.responseFacebook({result: res, browserHistory:this.props.history}); },
-			{
-				scope: "email,public_profile",
-				return_scopes: true,
-				enable_profile_selector:true,
-			});
+			window.FB.login(
+				res => {
+					this.props.responseFacebook({
+						result: res,
+						browserHistory: this.props.history
+					});
+				},
+				{
+					scope: "email,public_profile",
+					return_scopes: true,
+					enable_profile_selector: true
+				}
+			);
 		};
-		return(
+		return (
 			<div align="center">
-				<Button variant="contained" style={ cssLogin.FbButtonCss } className="FBlogin" onClick={ FBLogin }>FB 登入</Button>
+				<Button
+					variant="contained"
+					style={cssLogin.FbButtonCss}
+					className="FBlogin"
+					onClick={FBLogin}
+				>
+					FB 登入
+				</Button>
 			</div>
 		);
 	}
 }
 FBLogin.propTypes = {
 	history: PropTypes.object,
-	responseFacebook: PropTypes.func,
+	responseFacebook: PropTypes.func
 };
 
 export default withRouter(FBLogin);

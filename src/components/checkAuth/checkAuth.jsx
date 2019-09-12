@@ -11,47 +11,52 @@ export default function requireAuthentication(Component, type) {
 		constructor(props) {
 			super(props);
 			this.state = {
-				prevPropsObj: this.props,
+				prevPropsObj: this.props
 			};
 		}
 
 		componentDidMount() {
-			if(!this.props.isFBAuthorized && !this.props.isAuthorized){
-				return this.props.checkUserAuth({ browserHistory: this.props.history, authTypes: type });
+			if (!this.props.isFBAuthorized && !this.props.isAuthorized) {
+				return this.props.checkUserAuth({
+					browserHistory: this.props.history,
+					authTypes: type
+				});
 			}
 		}
 		static getDerivedStateFromProps(nextProps, prevState) {
-			if(!Immutable.is(nextProps, prevState.prevPropsObj)){
-				return { prevPropsObj: nextProps};
-			}else{
+			if (!Immutable.is(nextProps, prevState.prevPropsObj)) {
+				return { prevPropsObj: nextProps };
+			} else {
 				return null;
 			}
 		}
 
 		getSnapshotBeforeUpdate(prevProps) {
-			if(Immutable.is(this.props, prevProps)){
+			if (Immutable.is(this.props, prevProps)) {
 				return null;
-			}else if(this.props.isAuthorized && type === "login"){
+			} else if (this.props.isAuthorized && type === "login") {
 				return "group";
-			}else{
+			} else {
 				return "login";
 			}
 		}
 		componentDidUpdate(prevProps, prevState, snapshot) {
-			if(snapshot === "login"){
+			if (snapshot === "login") {
 				//this.props.history.push("/login");
-			}else if (snapshot === "group"){
+			} else if (snapshot === "group") {
 				this.props.history.push("/group");
 			}
 		}
 		render() {
-			return ( 
-				<div> 
-					{
-						(type === "auth") ?
-							this.props.isAuthorized === true ? <Component {...this.props } /> : null
-							: <Component {...this.props } />
-					} 
+			return (
+				<div>
+					{type === "auth" ? (
+						this.props.isAuthorized === true ? (
+							<Component {...this.props} />
+						) : null
+					) : (
+						<Component {...this.props} />
+					)}
 				</div>
 			);
 		}
@@ -61,21 +66,25 @@ export default function requireAuthentication(Component, type) {
 		history: PropTypes.object,
 		isAuthorized: PropTypes.bool,
 		checkUserAuth: PropTypes.func,
-		isFBAuthorized: PropTypes.bool,
+		isFBAuthorized: PropTypes.bool
 	};
 
-	const mapStateToProps = (state) => ({
+	const mapStateToProps = state => ({
 		isAuthorized: state.getIn(["LoginReducers", "isAuthorized"]),
-		isFBAuthorized: state.getIn(["FBLoginReducers", "__token", "isAuthorized"]),
+		isFBAuthorized: state.getIn(["FBLoginReducers", "__token", "isAuthorized"])
 	});
-	const checkUserAuthFun = (dispatch) => ({
-		checkUserAuth:(payload) => (
-			dispatch(checkAuth(dispatch, { browserHistory: payload.browserHistory, authTypes: payload.authTypes }))
-		)
+	const checkUserAuthFun = dispatch => ({
+		checkUserAuth: payload =>
+			dispatch(
+				checkAuth(dispatch, {
+					browserHistory: payload.browserHistory,
+					authTypes: payload.authTypes
+				})
+			)
 	});
 
-	return connect(mapStateToProps, checkUserAuthFun)(withRouter(AuthenticatedComponent));
+	return connect(
+		mapStateToProps,
+		checkUserAuthFun
+	)(withRouter(AuthenticatedComponent));
 }
-
-
-

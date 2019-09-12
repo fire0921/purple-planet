@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 const divStyle = {
 	fontFamily: "serif",
 	letterSpacing: "1px",
-	fontWeight: "400",
+	fontWeight: "400"
 	//fontStyle: "oblique",
 };
 
@@ -21,40 +21,85 @@ const feedbackStyle = {
 	textAlign: "-webkit-right",
 	display: "inline-block",
 	position: "absolute",
-	margin: "-7% 0 0 auto",
+	margin: "-7% 0 0 auto"
 };
 
 class top_Bar extends React.Component {
-	componentWillMount() {
-		
-	}
+	componentWillMount() {}
 	render() {
 		return (
 			<div>
 				<Grid container spacing={0}>
 					<Grid item xs={12} sm={12}>
 						<div className="TopIcon">
-							<div id="logo"><img alt="logo" src={ Logo } border="0" height="67%" width="67%" /></div>
-							<div id="search"><img alt="searcher" src={ Search } border="0" height="67%" width="67%"/></div>
-							<div id="heart02"><img alt="heart02" src={ heart02 } border="0" height="67%" width="67%"/></div>
-							<div id="cart02"><img alt="cart02" src={ cart02 } border="0" height="67%" width="67%"/></div>
+							<div id="logo">
+								<img
+									alt="logo"
+									src={Logo}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
+							<div id="search">
+								<img
+									alt="searcher"
+									src={Search}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
+							<div id="heart02">
+								<img
+									alt="heart02"
+									src={heart02}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
+							<div id="cart02">
+								<img
+									alt="cart02"
+									src={cart02}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
 						</div>
 					</Grid>
 					<Grid item xs={12} sm={12}>
-						<Grid container 
+						<Grid
+							container
 							spacing={0}
 							direction="row"
 							alignItems="center"
 							justify="center"
 						>
 							<Grid item xs={4} sm={4}>
-								<div id="feedback" style={ feedbackStyle }><img alt="feedback" src={ feedback } border="0" height="67%" width="67%"/></div>
+								<div id="feedback" style={feedbackStyle}>
+									<img
+										alt="feedback"
+										src={feedback}
+										border="0"
+										height="67%"
+										width="67%"
+									/>
+								</div>
 							</Grid>
 						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={12}>
-						<div className="TopBar" style={ divStyle }>
-							<div onClick={() => { this.props.history.push("/group"); }}>分類</div>
+						<div className="TopBar" style={divStyle}>
+							<div
+								onClick={() => {
+									this.props.history.push("/group");
+								}}
+							>
+								分類
+							</div>
 							<div className="withGroup">
 								<span>揪團跟團</span>
 							</div>
@@ -68,7 +113,7 @@ class top_Bar extends React.Component {
 }
 
 top_Bar.propTypes = {
-	history: PropTypes.object,
+	history: PropTypes.object
 };
 
 export default withRouter(top_Bar);

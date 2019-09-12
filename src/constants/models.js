@@ -1,41 +1,37 @@
 import Immutable from "immutable";
 
 export const TokenState = Immutable.fromJS({
-	"__token": {
+	__token: {
 		userId: "",
 		FBtoken: "",
 		userName: "",
 		isAuthorized: false,
-		type:"FB",
-	},
+		type: "FB"
+	}
 });
 
 export const LineTokenState = Immutable.fromJS({
-
 	LINEtoken: "",
 	isAuthorized: false,
-	type:"LINE"
-
+	type: "LINE"
 });
 
 export const UserState = Immutable.fromJS({
-
-	PhoneNumber:"",
-	Password:"",
-	Password2:"",
-	JWTtoken:"",
+	PhoneNumber: "",
+	Password: "",
+	Password2: "",
+	JWTtoken: "",
 	isAuthorized: false,
-	Type:"origin",
-
+	Type: "origin"
 });
 
 export const groupState = Immutable.fromJS({
-	"scroll": {
-		page:10,
+	scroll: {
+		page: 10,
 		loading: false,
-		complete: false,
+		complete: false
 	},
-	"groupData":[],
+	groupData: []
 });
 
 export const __APIKEYS = "ClentSecrectKeys";
