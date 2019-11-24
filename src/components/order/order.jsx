@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import PayWay from "./payWayRadioButtons.jsx";
 import Tables from "./table.jsx";
 import Addressee from "./addressee.jsx";
-import FBLoginContainers from "../../containers/FBLoginContainers";
+//import FBLoginContainers from "../../containers/FBLoginContainers";
 //import Fab from "@material-ui/core/Fab";
 //import Icon from "@material-ui/core/Icon";
 //import IconButton from "@material-ui/core/IconButton";
@@ -135,7 +135,8 @@ function Form(props) {
 				</Grid>
 				<Grid item xs={12}>
 					{!props.FBisAuthorized && !props.isAuthorized ? (
-						<FBLoginContainers />
+						// use line login
+						<Addressee {...props} />
 					) : (
 						<Addressee {...props} />
 					)}
@@ -188,16 +189,18 @@ class Order extends React.Component {
 		const updateItem = this.state.newAddress;
 
 		this.setState(prevState => ({
-			rows: prevState.rows.map(el =>
-				el.id === this.state.selected[0]
-					? {
-							...el,
-							name: updateItem.name,
-							phone: updateItem.phone,
-							address: updateItem.address
-					  }
-					: el
-			),
+			rows: prevState.rows.map(el => {
+				if (el.id === this.state.selected[0]) {
+					return {
+						...el,
+						name: updateItem.name,
+						phone: updateItem.phone,
+						address: updateItem.address
+					};
+				} else {
+					return el;
+				}
+			}),
 			newAddress: {},
 			checkOpen: false
 		}));

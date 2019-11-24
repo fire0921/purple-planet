@@ -14,14 +14,11 @@
 		},
 		"propWrapperFunctions": [
 			"forbidExtraProps",
-			{"property": "freeze", "object": "Object"},
-			{"property": "myFavoriteWrapper"}
+			{ "property": "freeze", "object": "Object" },
+			{ "property": "myFavoriteWrapper" }
 		]
 	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
+	"extends": ["plugin:react/recommended"],
 	"parserOptions": {
 		"ecmaVersion": 2018,
 		"ecmaFeatures": {
@@ -29,24 +26,13 @@
 		},
 		"sourceType": "module"
 	},
-	"plugins": [
-		"react"
-	],
+	"plugins": ["react"],
 	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"no-console":"off",
-		"quotes": [
-			"error",
-			"double"
-		],
+		"indent": ["error", "tab"],
+		"no-console": "off",
+		"quotes": ["error", "double"],
 		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
-		"semi": [
-			"error",
-			"always"
-		]
+		"semi": ["error", "always"]
 	}
 }

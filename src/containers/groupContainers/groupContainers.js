@@ -7,7 +7,8 @@ export default connect(
 		page: state.getIn(["groupReducers", "scroll", "page"]),
 		loading: state.getIn(["groupReducers", "scroll", "loading"]),
 		complete: state.getIn(["groupReducers", "scroll", "complete"]),
-		group_data: state.getIn(["groupReducers", "groupData"])
+		group_data: state.getIn(["groupReducers", "groupData"]),
+		imgArray: state.getIn(["groupReducers", "imgArray"])
 	}),
 	dispatch => ({
 		getGroupMoreData: payload => dispatch(low_enough_height(dispatch, payload)),
