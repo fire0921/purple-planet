@@ -59,7 +59,7 @@ class Group extends React.Component {
 		//var projectImgSlice = projectImgs.slice(0, this.props.page);
 		const datas = this.props.group_data;
 		const imgArray = [];
-		if(datas){
+		if (datas) {
 			this.props.group_data.forEach((e, index) => {
 				imgArray.push(
 					<div key={index}>
@@ -114,7 +114,7 @@ class Group extends React.Component {
 					</div>
 				);
 			});
-		};
+		}
 		return (
 			<div>
 				<div

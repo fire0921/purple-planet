@@ -25,49 +25,34 @@ const feedbackStyle = {
 };
 
 class top_Bar extends React.Component {
-	componentWillMount() {}
 	render() {
 		return (
 			<div>
 				<Grid container spacing={0}>
 					<Grid item xs={12} sm={12}>
 						<div className="TopIcon">
-							<div id="logo">
-								<img
-									alt="logo"
-									src={Logo}
-									border="0"
-									height="67%"
-									width="67%"
-								/>
-							</div>
-							<div id="search">
-								<img
-									alt="searcher"
-									src={Search}
-									border="0"
-									height="67%"
-									width="67%"
-								/>
-							</div>
-							<div id="heart02">
-								<img
-									alt="heart02"
-									src={heart02}
-									border="0"
-									height="67%"
-									width="67%"
-								/>
-							</div>
-							<div id="cart02">
-								<img
-									alt="cart02"
-									src={cart02}
-									border="0"
-									height="67%"
-									width="67%"
-								/>
-							</div>
+							<Grid item xs={10} sm={12}>
+								<div id="logo">
+									<img
+										alt="logo"
+										src={Logo}
+										border="0"
+										height="60%"
+										width="60%"
+									/>
+								</div>
+							</Grid>
+							<Grid item xs={2}>
+								<div id="cart02">
+									<img
+										alt="cart02"
+										src={cart02}
+										border="0"
+										height="90%"
+										width="90%"
+									/>
+								</div>
+							</Grid>
 						</div>
 					</Grid>
 					<Grid item xs={12} sm={12}>
@@ -77,25 +62,13 @@ class top_Bar extends React.Component {
 							direction="row"
 							alignItems="center"
 							justify="center"
-						>
-							<Grid item xs={4} sm={4}>
-								<div id="feedback" style={feedbackStyle}>
-									<img
-										alt="feedback"
-										src={feedback}
-										border="0"
-										height="67%"
-										width="67%"
-									/>
-								</div>
-							</Grid>
-						</Grid>
+						></Grid>
 					</Grid>
 					<Grid item xs={12} sm={12}>
 						<div className="TopBar" style={divStyle}>
 							<div
 								onClick={() => {
-									this.props.history.push("/group");
+									this.props.history.push("/productor");
 								}}
 							>
 								分類
@@ -117,3 +90,24 @@ top_Bar.propTypes = {
 };
 
 export default withRouter(top_Bar);
+
+/*
+							<div id="search">
+								<img
+									alt="searcher"
+									src={Search}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
+							<div id="heart02">
+								<img
+									alt="heart02"
+									src={heart02}
+									border="0"
+									height="67%"
+									width="67%"
+								/>
+							</div>
+*/
