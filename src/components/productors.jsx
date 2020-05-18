@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { withRouter } from "react-router-dom";
 import img1 from "./product/氣功墊商品介紹1.jpg";
 import img2 from "./product/氣功墊商品介紹2.jpg";
-import mp4 from "./product/影片1+2+3+4.mp4";
+//import mp4 from "./product/影片1+2+3+4.mp4";
 import Grid from "@material-ui/core/Grid";
 import * as Css from "../css/groupDetail.js";
 import Button from "@material-ui/core/Button";
@@ -18,7 +18,7 @@ class Player extends React.Component {
 	render() {
 		return (
 			<ReactPlayer
-				url={mp4}
+				url="https://anime1.me/8263"
 				loop={true}
 				controls={true}
 				width={"100%"}
@@ -73,13 +73,13 @@ class Productors extends React.Component {
 									variant="contained"
 									color="primary"
 									style={Css.BuyButton(
-										"10%",
+										"7%",
 										"6%",
 										"rgb(230, 153, 185)",
-										"15px"
+										"5px"
 									)}
 								>
-									揪團去
+									立即分享
 								</Button>
 							</ButtonGroup>
 						</Grid>

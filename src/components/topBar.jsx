@@ -31,25 +31,25 @@ class top_Bar extends React.Component {
 				<Grid container spacing={0}>
 					<Grid item xs={12} sm={12}>
 						<div className="TopIcon">
-							<Grid item xs={10} sm={12}>
+							<Grid item xs={11} sm={11}>
 								<div id="logo">
 									<img
 										alt="logo"
 										src={Logo}
 										border="0"
-										height="60%"
-										width="60%"
+										height="45%"
+										width="45%"
 									/>
 								</div>
 							</Grid>
-							<Grid item xs={2}>
-								<div id="cart02">
+							<Grid item xs={1} sm={1}>
+								<div id="cart02" >
 									<img
 										alt="cart02"
 										src={cart02}
 										border="0"
-										height="90%"
-										width="90%"
+										height="100%"
+										width="100%"
 									/>
 								</div>
 							</Grid>
@@ -68,7 +68,7 @@ class top_Bar extends React.Component {
 						<div className="TopBar" style={divStyle}>
 							<div
 								onClick={() => {
-									this.props.history.push("/productor");
+									this.props.history.push("/productors");
 								}}
 							>
 								分類
