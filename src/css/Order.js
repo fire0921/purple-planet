@@ -1,11 +1,11 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
-export const useStylesReddit = makeStyles(theme => ({
+export const useStylesReddit = makeStyles((theme) => ({
 	textFieldRoot: {
 		maxHeight: "20px",
 		maxWidth: "85%",
 		height: "fit-content",
-		width: "fit-contnet",
+		justifyContent: "space-between",
 		border: "solid",
 		borderWidth: "1px",
 		display: "flex",
@@ -16,19 +16,19 @@ export const useStylesReddit = makeStyles(theme => ({
 		//padding: "5px 1px 1px 10px",
 		//position: "absolute",
 		backgroundColor: "#e2e2e1",
-		minWidth:"20px",
+		minWidth: "20px",
 		maxHeight: "20px",
 		lineHeight: "13px",
 		paddingLeft: "10px",
 		justifyContent: "flex-start",
 		//marginLeft: "-9%",
-		zIndex:100,
+		zIndex: 100,
 		border: "none",
 		"&:hover": {
-			backgroundColor:"#e2e2e1",
+			backgroundColor: "#e2e2e1",
 		},
-		"& span.MuiButton-label":{
-			fontSize:"120%",
+		"& span.MuiButton-label": {
+			fontSize: "120%",
 		},
 	},
 	removeButton: {
@@ -38,16 +38,16 @@ export const useStylesReddit = makeStyles(theme => ({
 		justifyContent: "flex-end",
 		lineHeight: "0px",
 		maxHeight: "20px",
-		minWidth:"20px",
+		minWidth: "20px",
 		backgroundColor: "#e2e2e1",
 		//position: "absolute",
 		border: "none",
 		zIndex: 100,
 		"&:hover": {
-			backgroundColor:"#e2e2e1",
+			backgroundColor: "#e2e2e1",
 		},
-		"& span.MuiButton-label":{
-			fontSize:"190%",
+		"& span.MuiButton-label": {
+			fontSize: "190%",
 		},
 	},
 	root: {
@@ -62,13 +62,13 @@ export const useStylesReddit = makeStyles(theme => ({
 	},
 }));
 
-export function CssTextField(component){
-	const textField = withStyles(theme => ({
+export function CssTextField(component) {
+	const textField = withStyles((theme) => ({
 		root: {
 			//border: "1px solid #e2e2e1",
 			//height: "70%",
 			//overflow: "hidden",
-			border:"none",
+			border: "none",
 			//borderRadius: 5,
 			marginTop: 0,
 			marginBottom: 0,
@@ -91,11 +91,11 @@ export function CssTextField(component){
 			"& label.Mui-focused": {
 				color: "green",
 			},
-			"& label.MuiInputLabel-outlined.MuiInputLabel-marginDense":{
+			"& label.MuiInputLabel-outlined.MuiInputLabel-marginDense": {
 				transform: "translate(15%, 60%) scale(1)",
 			},
-			"& label.MuiInputLabel-outlined.MuiInputLabel-shrink":{
-				transform: "translate(14px, -6px) scale(0.75)"
+			"& label.MuiInputLabel-outlined.MuiInputLabel-shrink": {
+				transform: "translate(14px, -6px) scale(0.75)",
 			},
 			"& .MuiOutlinedInput-root": {
 				"& fieldset": {
@@ -115,7 +115,7 @@ export function CssTextField(component){
 }
 
 export const gridCarTitle = {
-	border:0,
+	border: 0,
 	background: "#d1c4e9",
 	marginTop: "2%",
 	textAlign: "center",
@@ -146,14 +146,14 @@ export const textCount = {
 };
 
 export const tableTextCount = {
-	fontSize:"120%",
-	letterSpacing: "2px"
+	fontSize: "120%",
+	letterSpacing: "2px",
 };
 
-export const tableTextCountLong = (el) =>({
-	fontSize:"120%",
-	marginLeft:(el.length>3)?"-8%":"",
-	letterSpacing: "2px"
+export const tableTextCountLong = (el) => ({
+	fontSize: "120%",
+	marginLeft: el.length > 3 ? "-8%" : "",
+	letterSpacing: "2px",
 });
 
 export const padding = (padd) => ({
@@ -185,7 +185,6 @@ export const notice = {
 	textAlign: "-webkit-right",
 	fontStyle: "oblique",
 	color: "#f06292",
-
 };
 
 export const payWay = {
@@ -193,7 +192,6 @@ export const payWay = {
 	fontStyle: "oblique",
 	color: "#f06292",
 	fontSize: "120%",
-
 };
 
 export const payWayLabel = {
@@ -201,9 +199,9 @@ export const payWayLabel = {
 	verticalAlign: "sub",
 };
 
-export const tableBorder = { 
-	borderBottom:"solid", 
-	borderWidth:"thin", 
-	paddingBottom:"1%",
-	borderColor:"#424242",
+export const tableBorder = {
+	borderBottom: "solid",
+	borderWidth: "thin",
+	paddingBottom: "1%",
+	borderColor: "#424242",
 };

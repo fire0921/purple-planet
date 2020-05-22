@@ -28,7 +28,7 @@ class Login extends React.Component {
 							type="text"
 							placeholder="請輸入手機號碼"
 							value={this.props.PhoneNumber}
-							onChange={i => this.props.onHandleChange(i)}
+							onChange={(i) => this.props.onHandleChange(i)}
 						/>
 					</div>
 					<div className="Password" style={cssLogin.stylePass}>
@@ -38,7 +38,7 @@ class Login extends React.Component {
 							type="password"
 							value={this.props.Password}
 							placeholder="請輸入密碼"
-							onChange={i => this.props.onHandleChange(i)}
+							onChange={(i) => this.props.onHandleChange(i)}
 						/>
 						<Button
 							variant="contained"
@@ -64,13 +64,19 @@ class Login extends React.Component {
 							style={cssLogin.style("50%", "5%")}
 							type="password"
 							placeholder="再次確認密碼"
-							onChange={i => this.props.onHandleChange(i)}
+							onChange={(i) => this.props.onHandleChange(i)}
 						/>
 						<Button
 							variant="contained"
 							style={cssLogin.ButtonCss}
 							className="login"
-							onClick={i => this.props.onHandleSubmit(i)}
+							onClick={() =>
+								this.props.onHandleSubmit(
+									this.props.history,
+									this.props.PhoneNumber,
+									this.props.Password
+								)
+							}
 						>
 							註冊
 						</Button>
@@ -103,7 +109,7 @@ Login.propTypes = {
 	onHandleChange: PropTypes.func,
 	onHandleSubmit: PropTypes.func,
 	checkUserAuth: PropTypes.func,
-	history: PropTypes.object
+	history: PropTypes.object,
 };
 
 export default withRouter(Login);
