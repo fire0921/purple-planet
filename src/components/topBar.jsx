@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 const divStyle = {
 	fontFamily: "serif",
 	letterSpacing: "1px",
-	fontWeight: "400"
+	fontWeight: "400",
 	//fontStyle: "oblique",
 };
 
@@ -21,7 +21,7 @@ const feedbackStyle = {
 	textAlign: "-webkit-right",
 	display: "inline-block",
 	position: "absolute",
-	margin: "-7% 0 0 auto"
+	margin: "-7% 0 0 auto",
 };
 
 class top_Bar extends React.Component {
@@ -43,7 +43,7 @@ class top_Bar extends React.Component {
 								</div>
 							</Grid>
 							<Grid item xs={1} sm={1}>
-								<div id="cart02" >
+								<div id="cart02">
 									<img
 										alt="cart02"
 										src={cart02}
@@ -68,7 +68,7 @@ class top_Bar extends React.Component {
 						<div className="TopBar" style={divStyle}>
 							<div
 								onClick={() => {
-									this.props.history.push("/productors");
+									this.props.history.push("/group");
 								}}
 							>
 								分類
@@ -86,7 +86,7 @@ class top_Bar extends React.Component {
 }
 
 top_Bar.propTypes = {
-	history: PropTypes.object
+	history: PropTypes.object,
 };
 
 export default withRouter(top_Bar);
